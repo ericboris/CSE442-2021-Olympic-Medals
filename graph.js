@@ -837,13 +837,6 @@ const DATA = [
 	"rankTotal": "77"
 }];
 
-const DUMMY_DATA = [
-    { id: 'd1', country: 'Nepal', value: 10 },
-    { id: 'd2', country: 'Thailand', value: 14 },
-    { id: 'd3', country: 'Vietnam', value: 16 },
-    { id: 'd4', country: 'India', value: 9 },
-];
-
 // Chart dimensions.
 // Use margins to keep axes within frame.
 const MARGINS = {top: 20, bottom: 10};
