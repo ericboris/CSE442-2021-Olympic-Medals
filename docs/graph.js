@@ -835,244 +835,251 @@ const DATA = [
 		"bronze": "1",
 		"total": "1",
 		"rankTotal": "77"
-	}];
-	
-	
-	// import {Data} from './BetterMedals.json'
-	// const DATA = Data
-	
-	//import {scrubber} from "";
-	
-	
-	// Chart dimensions.
-	// Use margins to keep axes within frame.
-	const MARGINS = {top: 20, bottom: 10};
-	const CHART_WIDTH = 600;
-	const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
-	
-	const chartContainer = d3
-		.select('svg')
-		.attr('width', CHART_WIDTH)
-		.attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
-	
-	// Minimum space between top of tallest bar and top of graph.
-	const HEADSPACE = 8;
-	
-	// Horizontal padding between bars.
-	const BAR_PADDING = 0.1;
-	
-	// Define bar width.
-	const x = d3
-		.scaleBand()
-		.rangeRound([0, CHART_WIDTH/2])
-		.padding(BAR_PADDING)
-		.domain(DATA.map((d) => d.country));
-	
-	// Define bar height.
-	const y = d3
-		.scaleLinear()
-		.range([CHART_HEIGHT + HEADSPACE, MARGINS.top])
-		.domain([0, d3.max(DATA, (d) => d.total) + HEADSPACE])
-		.nice();
-	
-	const charttotal = chartContainer.append('g');
-	
-	// Create chart axes.
-	charttotal
-		.append('g')
-		.attr('transform', `translate(0, ${CHART_HEIGHT})`)
-		.attr('color', 'black')
-		.call(d3.axisBottom(x).tickSizeOuter(0))
-		.append('text')
-		  .attr('text-anchor', 'end')
-		  .attr('fill', 'black')
-		  .attr('font-size', '12px')
-		  .attr('font-weight', 'bold')
-		  .attr('x', CHART_WIDTH/2)
-		  .attr('y', 28)
-		  .text('Country');
-	
-	
-	charttotal
-		.append('g')
-		.attr('transform', `translate(20,0)`)
-		.attr('color', 'black')
-		.call(d3.axisLeft(y).tickSizeOuter(0))
-		.append('text')
-			.attr('transform', `translate(0, 10) rotate(-90)`)
-			.attr('text-anchor', 'end')
-			.attr('fill', 'black')
-			.attr('font-size', '12px')
-			.attr('font-weight', 'bold')
-			.text('Total Medals Earned');
-		
-	// Bar value label offsets.
-	const VALUE_LABEL_HORIZ_OFFSET = x.bandwidth() / 2;
-	const VALUE_LABEL_VERT_OFFSET = -20;
-	
-	// Render only selected data.
-	let selectedData = DATA;
-	
-	function renderChart() {
-		// Show selected chart bars.
-		charttotal
-			.selectAll('.bar')
-			.data(selectedData, d => d.rank)
-			.enter()
-			.append('rect')
-			.classed('bar', true)
-			.attr('width', x.bandwidth())
-			.attr('height', (d) => CHART_HEIGHT - y(d.total))
-			.attr('x', (d) => x(d.country))
-			.attr('y', (d) => y(d.total));
-	
-		// Show selected bar value labels.
-		charttotal
-			.selectAll('.label')
-			.data(selectedData, d => d.rank)
-			.enter()
-			.append('text')
-			.text((d) => d.total)
-			.attr('x',(d)=> x(d.country) + VALUE_LABEL_HORIZ_OFFSET)
-			.attr('y',(d)=> y(d.total) + VALUE_LABEL_VERT_OFFSET)
-			.attr('text-anchor', 'middle')
-			.classed('label', true);
-	
-		// Remove unselected chart bars.
-		charttotal
-			.selectAll('.bar')
-			.data(selectedData, d => d.rank)
-			.exit()
-			.remove();
-		
-		// Remove unselected chart labels.
-		charttotal
-			.selectAll('.label')
-			.data(selectedData, d => d.rank)
-			.exit()
-			.remove();
-			
-		chartgold
-			.selectAll('.bar')
-			.data(selectedData, d => d.rank)
-			.enter()
-			.append('rect')
-			.classed('bar', true)
-			.attr('width', x2.bandwidth())
-			.attr('height', (d) => CHART_HEIGHT - y(d.gold))
-			.attr('x', (d) => x(d.country))
-			.attr('y', (d) => y(d.gold));
-	
-		// Show selected bar value labels.
-		chartgold
-			.selectAll('.label')
-			.data(selectedData, d => d.rank)
-			.enter()
-			.append('text')
-			.text((d) => d.gold)
-			.attr('x',(d)=> x(d.country) + VALUE_LABEL_HORIZ_OFFSET2)
-			.attr('y',(d)=> y(d.gold) + VALUE_LABEL_VERT_OFFSET2)
-			.attr('text-anchor', 'middle')
-			.classed('label', true);
-	
-		// Remove unselected chart bars.
-		chartgold
-			.selectAll('.bar')
-			.data(selectedData, d => d.rank)
-			.exit()
-			.remove();
-	
-		// Remove unselected chart labels.
-		chartgold
-			.selectAll('.label')
-			.data(selectedData, d => d.rank)
-			.exit()
-			.remove();
-	
 	}
+];
 	
-	//GOLD CHART
-	//Define bar width.
-	const x2 = d3
-		.scaleBand()
-		.rangeRound([CHART_WIDTH/2, CHART_WIDTH])
-		.padding(BAR_PADDING)
-		.domain(DATA.map((d) => d.country));
-	
-	// Define bar height.
-	const y2 = d3
-		.scaleLinear()
-		.range([CHART_HEIGHT + HEADSPACE, MARGINS.top])
-		.domain([0, d3.max(DATA, (d) => d.gold) + HEADSPACE])
-		.nice();
-	
-	const chartgold = chartContainer.append('g');
-	
-	// Create chart axes.
-	chartgold
-		.append('g')
-		.attr('transform', `translate(0, ${CHART_HEIGHT})`)
-		.attr('color', 'black')
-		.call(d3.axisBottom(x2).tickSizeOuter(0))
-		.append('text')
-		  .attr('text-anchor', 'end')
-		  .attr('fill', 'black')
-		  .attr('font-size', '50px')
-		  .attr('font-weight', 'bold')
-		  .attr('x', CHART_WIDTH/2)
-		  .attr('y', 28)
-		  .text('Country');
-	
-	
-	chartgold
-		.append('g')
-		.attr('transform', `translate(20,0)`)
-		.attr('color', 'black')
-		.call(d3.axisLeft(y2).tickSizeOuter(0))
-		.append('text')
-			.attr('transform', `translate(0, 10) rotate(-90)`)
-			.attr('text-anchor', 'end')
-			.attr('fill', 'black')
-			.attr('font-size', '12px')
-			.attr('font-weight', 'bold')
-			.text('Gold Medals Earned');
-		
-	// Bar value label offsets.
-	const VALUE_LABEL_HORIZ_OFFSET2 = x2.bandwidth() / 2;
-	const VALUE_LABEL_VERT_OFFSET2 = -20;
-	
-	
-	// Prevent blank chart on page-load.
-	renderChart();
-	
-	// Create empty list.
-	const listItems = d3
-		.select('#data')
-		.classed('scrollCheckbox', true)
-		.select('ul')
-		.selectAll('li')
-		.data(DATA)
-		.enter()
-		.append('li');
-	
-	listItems
-		.append('span')
-		.text((d)=> d.country);
-	
-	// Create checklist.
-	let unselectedIds = [];
-	
-	listItems
-		.append('input')
-		.attr('type', 'checkbox')
-		.attr('checked', true)
-		.on('change', (d1) => {
-			if (unselectedIds.indexOf(d1.rank) === -1) {
-				unselectedIds.push(d1.rank);
-			} else {
-				unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
-			}
-			// Update selected data based on current selection.
-			selectedData = DATA.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
-			renderChart();
-		});
+// import {Data} from './BetterMedals.json'
+// const DATA = Data
+
+//import {scrubber} from "";
+
+
+// Chart dimensions.
+// Use margins to keep axes within frame.
+const MARGINS = {top: 20, bottom: 10};
+const CHART_WIDTH = 600;
+const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
+
+const chartContainer = d3
+    .select('svg')
+    .attr('width', CHART_WIDTH)
+    .attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
+
+// Minimum space between top of tallest bar and top of graph.
+const HEADSPACE = 8;
+
+// Horizontal padding between bars.
+const BAR_PADDING = 0.1;
+
+// Define bar width.
+const x = d3
+    .scaleBand()
+    .rangeRound([0, CHART_WIDTH/2])
+    .padding(BAR_PADDING)
+    .domain(DATA.map((d) => d.country));
+
+// Define bar height.
+const y = d3
+    .scaleLinear()
+    .range([CHART_HEIGHT + HEADSPACE, MARGINS.top])
+    .domain([0, d3.max(DATA, (d) => d.total) + HEADSPACE])
+    .nice();
+
+const charttotal = chartContainer.append('g');
+
+// Create x axis.
+charttotal
+    .append('g')
+    .attr('transform', `translate(0, ${CHART_HEIGHT})`)
+    .attr('color', 'black')
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .append('text')
+      .attr('text-anchor', 'end')
+      .attr('fill', 'black')
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
+      .attr('x', CHART_WIDTH/2)
+      .attr('y', 28)
+      .text('Country');
+
+// Create y axis.
+charttotal
+    .append('g')
+    .attr('transform', `translate(20,0)`)
+    .attr('color', 'black')
+    .call(d3.axisLeft(y).tickSizeOuter(0))
+    .append('text')
+        .attr('transform', `translate(0, 10) rotate(-90)`)
+        .attr('text-anchor', 'end')
+        .attr('fill', 'black')
+        .attr('font-size', '12px')
+        .attr('font-weight', 'bold')
+        .text('Total Medals Earned');
+    
+// Bar value label offsets.
+const VALUE_LABEL_HORIZ_OFFSET = x.bandwidth() / 2;
+const VALUE_LABEL_VERT_OFFSET = -20;
+
+// Render only selected data.
+let selectedData = [];
+
+function renderChart() {
+    // Show selected chart bars.
+    charttotal
+        .selectAll('.bar')
+        .data(selectedData, d => d.rank)
+        .enter()
+        .append('rect')
+        .classed('bar', true)
+        .attr('width', x.bandwidth())
+        .attr('height', (d) => CHART_HEIGHT - y(d.total))
+        .attr('x', (d) => x(d.country))
+        .attr('y', (d) => y(d.total));
+
+    // Show selected bar value labels.
+    charttotal
+        .selectAll('.label')
+        .data(selectedData, d => d.rank)
+        .enter()
+        .append('text')
+        .text((d) => d.total)
+        .attr('x',(d)=> x(d.country) + VALUE_LABEL_HORIZ_OFFSET)
+        .attr('y',(d)=> y(d.total) + VALUE_LABEL_VERT_OFFSET)
+        .attr('text-anchor', 'middle')
+        .classed('label', true);
+
+    // Remove unselected chart bars.
+    charttotal
+        .selectAll('.bar')
+        .data(selectedData, d => d.rank)
+        .exit()
+        .remove();
+    
+    // Remove unselected chart labels.
+    charttotal
+        .selectAll('.label')
+        .data(selectedData, d => d.rank)
+        .exit()
+        .remove();
+}
+
+// Initialize page with blank chart.
+renderChart();
+
+// Create empty list.
+const listItems = d3
+    .select('#data')
+    .classed('scrollCheckbox', true)
+    .select('ul')
+    .selectAll('li')
+    .data(DATA)
+    .enter()
+    .append('li');
+
+// Initialize checklist items.
+listItems
+    .append('span')
+    .text((d)=> d.country)
+    .append('input')
+    .attr('type', 'checkbox');
+
+// Initialize empty checklist.
+let unselectedIds = [];
+for (let i = 1; i <= DATA.length; i++) {
+    unselectedIds.push(i.toString());
+}
+
+// Add event listener to checklist items.
+listItems
+    .on('change', (d1) => {
+        if (unselectedIds.indexOf(d1.rank) === -1) {
+            unselectedIds.push(d1.rank);
+        } else {
+            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
+        }
+        // Update selected data based on current selection.
+        selectedData = DATA.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
+        renderChart();
+    });
+
+
+/* ---------------------- GOLD CHART TIME OUT ZONE ---------------------------
+
+//GOLD CHART
+function renderGoldChart() {
+    // Show gold chart bars.
+    chartgold
+        .selectAll('.bar')
+        .data(selectedData, d => d.rank)
+        .enter()
+        .append('rect')
+        .classed('bar', true)
+        .attr('width', x2.bandwidth())
+        .attr('height', (d) => CHART_HEIGHT - y(d.gold))
+        .attr('x', (d) => x(d.country))
+        .attr('y', (d) => y(d.gold));
+
+    // Show selected bar value labels.
+    chartgold
+        .selectAll('.label')
+        .data(selectedData, d => d.rank)
+        .enter()
+        .append('text')
+        .text((d) => d.gold)
+        .attr('x',(d)=> x(d.country) + VALUE_LABEL_HORIZ_OFFSET2)
+        .attr('y',(d)=> y(d.gold) + VALUE_LABEL_VERT_OFFSET2)
+        .attr('text-anchor', 'middle')
+        .classed('label', true);
+
+    // Remove unselected chart bars.
+    chartgold
+        .selectAll('.bar')
+        .data(selectedData, d => d.rank)
+        .exit()
+        .remove();
+
+    // Remove unselected chart labels.
+    chartgold
+        .selectAll('.label')
+        .data(selectedData, d => d.rank)
+        .exit()
+        .remove();
+ 
+}
+
+//Define bar width.
+const x2 = d3
+    .scaleBand()
+    .rangeRound([CHART_WIDTH/2, CHART_WIDTH])
+    .padding(BAR_PADDING)
+    .domain(DATA.map((d) => d.country));
+// Define bar height.
+const y2 = d3
+    .scaleLinear()
+    .range([CHART_HEIGHT + HEADSPACE, MARGINS.top])
+    .domain([0, d3.max(DATA, (d) => d.gold) + HEADSPACE])
+    .nice();
+const chartgold = chartContainer.append('g');
+
+// Create chart axes.
+chartgold
+    .append('g')
+    .attr('transform', `translate(0, ${CHART_HEIGHT})`)
+    .attr('color', 'black')
+    .call(d3.axisBottom(x2).tickSizeOuter(0))
+    .append('text')
+      .attr('text-anchor', 'end')
+      .attr('fill', 'black')
+      .attr('font-size', '50px')
+      .attr('font-weight', 'bold')
+      .attr('x', CHART_WIDTH/2)
+      .attr('y', 28)
+      .text('Country');
+
+chartgold
+    .append('g')
+    .attr('transform', `translate(20,0)`)
+    .attr('color', 'black')
+    .call(d3.axisLeft(y2).tickSizeOuter(0))
+    .append('text')
+        .attr('transform', `translate(0, 10) rotate(-90)`)
+        .attr('text-anchor', 'end')
+        .attr('fill', 'black')
+        .attr('font-size', '12px')
+        .attr('font-weight', 'bold')
+        .text('Gold Medals Earned');
+
+// Bar value label offsets.
+const VALUE_LABEL_HORIZ_OFFSET2 = x2.bandwidth() / 2;
+const VALUE_LABEL_VERT_OFFSET2 = -20;
+*/
