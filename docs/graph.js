@@ -877,7 +877,7 @@ const DATA = [
 	
 	const charttotal = chartContainer.append('g');
 	
-	// Create chart axes.
+    // Create x axis.
 	charttotal
 		.append('g')
 		.attr('transform', `translate(0, ${CHART_HEIGHT})`)
@@ -892,7 +892,7 @@ const DATA = [
 		  .attr('y', 28)
 		  .text('Country');
 	
-	
+    // Create y axis.
 	charttotal
 		.append('g')
 		.attr('transform', `translate(20,0)`)
@@ -951,7 +951,9 @@ const DATA = [
 			.data(selectedData, d => d.rank)
 			.exit()
 			.remove();
-			
+
+        /*
+        // Show gold chart bars.
 		chartgold
 			.selectAll('.bar')
 			.data(selectedData, d => d.rank)
@@ -988,24 +990,27 @@ const DATA = [
 			.data(selectedData, d => d.rank)
 			.exit()
 			.remove();
-	
+        */	
 	}
-	
+
 	//GOLD CHART
 	//Define bar width.
+    /*
 	const x2 = d3
 		.scaleBand()
 		.rangeRound([CHART_WIDTH/2, CHART_WIDTH])
 		.padding(BAR_PADDING)
 		.domain(DATA.map((d) => d.country));
-	
+    */
 	// Define bar height.
+    /*
 	const y2 = d3
 		.scaleLinear()
 		.range([CHART_HEIGHT + HEADSPACE, MARGINS.top])
 		.domain([0, d3.max(DATA, (d) => d.gold) + HEADSPACE])
 		.nice();
-	
+    */ 
+    /*
 	const chartgold = chartContainer.append('g');
 	
 	// Create chart axes.
@@ -1022,8 +1027,7 @@ const DATA = [
 		  .attr('x', CHART_WIDTH/2)
 		  .attr('y', 28)
 		  .text('Country');
-	
-	
+
 	chartgold
 		.append('g')
 		.attr('transform', `translate(20,0)`)
@@ -1036,11 +1040,13 @@ const DATA = [
 			.attr('font-size', '12px')
 			.attr('font-weight', 'bold')
 			.text('Gold Medals Earned');
-		
+	*/	
+
 	// Bar value label offsets.
+    /*
 	const VALUE_LABEL_HORIZ_OFFSET2 = x2.bandwidth() / 2;
 	const VALUE_LABEL_VERT_OFFSET2 = -20;
-	
+    */
 	
 	// Prevent blank chart on page-load.
 	renderChart();
