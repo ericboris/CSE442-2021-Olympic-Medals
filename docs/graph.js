@@ -847,8 +847,8 @@ const DATA = [
 // Chart dimensions.
 // Use margins to keep axes within frame.
 const MARGINS = {top: 20, bottom: 10};
-const CHART_WIDTH = 600;
-const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
+const CHART_WIDTH = 2600;
+const CHART_HEIGHT = 700 - MARGINS.top - MARGINS.bottom;
 
 const chartContainer = d3
     .select('svg')
@@ -885,7 +885,7 @@ charttotal
     .call(d3.axisBottom(x).tickSizeOuter(0))
     .append('text')
       .attr('text-anchor', 'end')
-      .attr('fill', 'black')
+      .attr('fill', 'red')
       .attr('font-size', '12px')
       .attr('font-weight', 'bold')
       .attr('x', CHART_WIDTH/2)
@@ -895,13 +895,13 @@ charttotal
 // Create y axis.
 charttotal
     .append('g')
-    .attr('transform', `translate(20,0)`)
+    .attr('transform', `translate(30,0)`)
     .attr('color', 'black')
     .call(d3.axisLeft(y).tickSizeOuter(0))
     .append('text')
         .attr('transform', `translate(0, 10) rotate(-90)`)
         .attr('text-anchor', 'end')
-        .attr('fill', 'black')
+        .attr('fill', 'red')
         .attr('font-size', '12px')
         .attr('font-weight', 'bold')
         .text('Total Medals Earned');
