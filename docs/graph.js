@@ -911,7 +911,7 @@ const DATA = [
 	const VALUE_LABEL_VERT_OFFSET = -20;
 	
 	// Render only selected data.
-	let selectedData = DATA;
+	let selectedData = [];
 	
 	function renderChart() {
 		// Show selected chart bars.
@@ -1048,7 +1048,7 @@ const DATA = [
 	const VALUE_LABEL_VERT_OFFSET2 = -20;
     */
 	
-	// Prevent blank chart on page-load.
+	// Initialize page with blank chart.
 	renderChart();
 	
 	// Create empty list.
@@ -1060,18 +1060,22 @@ const DATA = [
 		.data(DATA)
 		.enter()
 		.append('li');
-	
+
+    // Initialize checklist items.
 	listItems
 		.append('span')
-		.text((d)=> d.country);
+		.text((d)=> d.country)
+        .append('input')
+		.attr('type', 'checkbox');
 	
-	// Create checklist.
+	// Initialize empty checklist.
 	let unselectedIds = [];
-	
+    for (let i = 1; i <= DATA.length; i++) {
+        unselectedIds.push(i.toString());
+    }
+    
+    // Add event listener to checklist items.
 	listItems
-		.append('input')
-		.attr('type', 'checkbox')
-		.attr('checked', true)
 		.on('change', (d1) => {
 			if (unselectedIds.indexOf(d1.rank) === -1) {
 				unselectedIds.push(d1.rank);
