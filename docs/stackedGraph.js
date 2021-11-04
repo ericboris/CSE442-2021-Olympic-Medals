@@ -838,6 +838,7 @@ const METALS_DATA = [
 	}
 ];
 
+
 medals = ['gold', 'silver', 'bronze'];
 
 countryMedals = medals.flatMap(medal => METALS_DATA.map(d => ({country: d.country, medal, count: d[medal]}))) // pivot longer
@@ -856,6 +857,42 @@ chart = StackedBarChart(countryMedals, {
 })
 
 key = Legend(chart.scales.color, {title: "Medal (color)"});
+
+// Create empty list.
+const listItems = d3
+    .select('#data')
+    .classed('scrollCheckbox', true)
+    .select('ul')
+    .selectAll('li')
+    .data(METALS_DATA)
+    .enter()
+    .append('li');
+
+// Initialize checklist items.
+listItems
+    .append('span')
+    .text((d)=> d.country)
+    .append('input')
+    .attr('type', 'checkbox');
+
+// Initialize empty checklist.
+let unselectedIds = [];
+for (let i = 1; i <= METALS_DATA.length; i++) {
+    unselectedIds.push(i.toString());
+}
+
+// Add event listener to checklist items.
+listItems
+    .on('change', (d1) => {
+        if (unselectedIds.indexOf(d1.rank) === -1) {
+            unselectedIds.push(d1.rank);
+        } else {
+            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
+        }
+        // Update selected data based on current selection.
+        selectedData = METALS_DATA.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
+        renderChart();
+    });
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
