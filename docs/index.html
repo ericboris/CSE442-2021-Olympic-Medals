@@ -73,11 +73,11 @@
                 list-style-type: none;
             }
         </style>
-        <script lang="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
-        <script lang="javascript" src="https://d3js.org/d3.v5.min.js" defer></script>
+        <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-axis.v1.min.js" defer></script>
-        <script src="graph.js" defer></script>
+        <!-- <script src="graph.js" defer></script> -->
+        <script src="stackedGraph.js" defer></script>
     </head>
     <body>
         <div class="content">
@@ -94,6 +94,9 @@
             <section>
                 <em>[Add: your visualization]</em>
                 <div id="chart">
+                    <svg></svg>
+                </div>
+                <div id="legend">
                     <svg></svg>
                 </div>
                 <div id="data">
