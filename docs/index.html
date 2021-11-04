@@ -8,7 +8,7 @@
             body {
                 margin: 0 auto 0 auto;
                 padding: 0;
-                max-width: 1200px;
+                max-width: 1000px;
                 font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
                 font-size: 0.95em;
             }
@@ -34,11 +34,17 @@
                 padding: 15px 20px;
                 background-color: #ffffff;
             }
-            .title, .title h1, .title a {
+            .title h1, .title a {
                 color: #492a7c;
                 font-size: 24pt;
                 margin-bottom: 20px;
                 margin-top: 5px;
+            }
+            .title {
+                color: #492a7c;
+                font-size: 8pt;
+                margin-bottom: 5px;
+                margin-top: 8px;
             }
             .footer {
                 border-top: 1px solid #ccc;
@@ -54,9 +60,9 @@
                 color: #ce3333;
             }
             .scrollCheckbox {
-                border:2px solid #ccc; 
-                width:300px; 
-                height: 100px; 
+                border:2px solid #ccc;
+                width:300px;
+                height: 100px;
                 overflow-y: scroll;
 
             }
@@ -73,18 +79,20 @@
                 list-style-type: none;
             }
             #chart {
-                width: 200vw;
+                width: 120vw;
+                overflow-y: scroll;
+                heigh: 100vw;
             }
             #chart-outer {
-                max-width: 100vw;
-                overflow-x: scroll;
+                max-height: 60vw;
+                overflow-y: scroll;
             }
         </style>
         <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-axis.v1.min.js" defer></script>
         <!-- <script src="graph.js" defer></script> -->
-        <script src="stackedGraph.js" defer></script>
+        <script src="stackedHorizontalGraph.js" defer></script>
     </head>
     <body>
         <div class="content">
@@ -105,6 +113,7 @@
                         <svg></svg>
                     </div>
                 </div>
+
                 <div id="legend">
                     <svg></svg>
                 </div>

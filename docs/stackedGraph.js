@@ -903,11 +903,11 @@ function StackedBarChart(data, {
   z = () => 1, // given d in data, returns the (categorical) z-value
   title, // given d in data, returns the title text
   marginTop = 30, // top margin, in pixels
-  marginRight = 0, // right margin, in pixels
+  marginRight = 100, // right margin, in pixels
   marginBottom = 100, // bottom margin, in pixels
-  marginLeft = 40, // left margin, in pixels
+  marginLeft = 200, // left margin, in pixels
   width = 640, // outer width, in pixels
-  height = 400, // outer height, in pixels
+  height = 600, // outer height, in pixels
   xDomain, // array of x-values
   xRange = [marginLeft, width - marginRight], // [left, right]
   xPadding = 0.1, // amount of x-range to reserve to separate bars
@@ -1026,7 +1026,7 @@ function StackedBarChart(data, {
 function Legend(color, {
   title,
   tickSize = 6,
-  width = 320,
+  width = 100,
   height = 44 + tickSize,
   marginTop = 18,
   marginRight = 0,
