@@ -922,7 +922,7 @@ function renderChart() {
         .append('rect')
         .classed('bar', true)
         .attr('width', x.bandwidth())
-        .attr('height', (d) => CHART_HEIGHT - y(d.total))
+        .attr('height', (d) => CHART_HEIGHT -   y(d.total) )
         .attr('x', (d) => x(d.country))
         .attr('y', (d) => y(d.total));
 

@@ -851,11 +851,11 @@ chart = StackedBarChart(countryMedals, {
   zDomain: medals,
   //colors: d3.schemeSpectral[medals.length],
   colors: ["#ffd700", "#c0c0c0", "#b08d57"],
-  width: 800,
+  width: 2000,
   height: 500
 })
 
-key = Legend(chart.scales.color, {title: "Medal (color)"});
+  key = Legend(chart.scales.color, {title: "Medal (color)"});
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
@@ -867,7 +867,7 @@ function StackedBarChart(data, {
   title, // given d in data, returns the title text
   marginTop = 30, // top margin, in pixels
   marginRight = 0, // right margin, in pixels
-  marginBottom = 30, // bottom margin, in pixels
+  marginBottom = 100, // bottom margin, in pixels
   marginLeft = 40, // left margin, in pixels
   width = 640, // outer width, in pixels
   height = 400, // outer height, in pixels
@@ -971,7 +971,14 @@ function StackedBarChart(data, {
 
   svg.append("g")
       .attr("transform", `translate(0,${yScale(0)})`)
-      .call(xAxis);
+      .call(xAxis)
+	  .selectAll("text")
+	  .attr("y", 0)
+	  .attr("x", 9)
+	  .attr("dy", ".35em")
+	  .attr("transform", "rotate(90)")
+	  .style("text-anchor", "start");
+	;
 
   return Object.assign(svg.node(), {scales: {color}});
 }

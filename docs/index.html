@@ -72,6 +72,13 @@
             ul{
                 list-style-type: none;
             }
+            #chart {
+                width: 200vw;
+            }
+            #chart-outer {
+                max-width: 100vw;
+                overflow-x: scroll;
+            }
         </style>
         <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
@@ -93,8 +100,10 @@
 
             <section>
                 <em>[Add: your visualization]</em>
-                <div id="chart">
-                    <svg></svg>
+                <div id="chart-outer">
+                    <div id="chart">
+                        <svg></svg>
+                    </div>
                 </div>
                 <div id="legend">
                     <svg></svg>
