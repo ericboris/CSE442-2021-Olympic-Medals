@@ -1,10 +1,10 @@
 // Load medals.json data from GitHub repo.
-const METALS_DATA = (() => {
+const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+const medalsData = (() => {
   var md = null;
   $.ajax({
     'async': false,
-    'global': false,
-    'url': "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6",
+    'url': url, 
     'dataType': "json",
     'success': (data) => {
       md = data;
@@ -13,11 +13,15 @@ const METALS_DATA = (() => {
   return md;
 })();
 
-medals = ['gold', 'silver', 'bronze'];
+const medals = ['gold', 'silver', 'bronze'];
 
-countryMedals = medals.flatMap(medal => METALS_DATA.map(d => ({country: d.country, medal, count: d[medal]}))); // pivot longer
+// Create an collection of objects containing countries, medal type, and number 
+// of medals of that type for each type of medal. 
+const countryMedals = medals.flatMap((medal) => medalsData.map((d) => ({
+        country: d.country, medal, count: d[medal]
+    }))); 
 
-chart = StackedBarChart(countryMedals, {
+let chart = StackedBarChart(countryMedals, {
     x: d => d.count,
     y: d => d.country,
     z: d => d.medal,
@@ -32,15 +36,15 @@ chart = StackedBarChart(countryMedals, {
     marginRight:200
 });
 
-key = Legend(chart.scales.color, {title: "Medal (color)"});
+const key = Legend(chart.scales.color, {title: "Medal (color)"});
 
 // Create empty list.
-const listItems = d3
+let listItems = d3
     .select('#data')
     .classed('scrollCheckbox', true)
     .select('ul')
     .selectAll('li')
-    .data(METALS_DATA)
+    .data(medalsData)
     .enter()
     .append('li');
 
@@ -53,7 +57,7 @@ listItems
 
 // Initialize empty checklist.
 let unselectedIds = [];
-for (let i = 1; i <= METALS_DATA.length; i++) {
+for (let i = 1; i <= medalsData.length; i++) {
     unselectedIds.push(i.toString());
 }
 
@@ -66,7 +70,7 @@ listItems
             unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
         }
         // Update selected data based on current selection.
-        selectedData = METALS_DATA.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
+        selectedData = medalsData.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
         renderChart();
     });
 
