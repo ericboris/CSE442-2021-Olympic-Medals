@@ -13,30 +13,56 @@ const medalsData = (() => {
   return md;
 })();
 
+let selectedData = [];
 const medals = ['gold', 'silver', 'bronze'];
+const colors = ["#ffd700", "#c0c0c0", "#b08d57"];
+
+// Render blank chart
+const width = 1800;
+const height = 1000;
+let svg = d3
+    .select("#chart")
+    .select("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+const key = Legend(d3.scaleOrdinal(medals, colors), {title: "Medal (color)"});
+
+// TODO Make this clear the svg for redrawing new chart.
+function clear() {
+    d3
+    .select("#chart")
+    .select("svg")
+    .selectAll("g")
+    .exit()
+    .remove();
+}
 
 // Create an collection of objects containing countries, medal type, and number 
 // of medals of that type for each type of medal. 
-const countryMedals = medals.flatMap((medal) => medalsData.map((d) => ({
-        country: d.country, medal, count: d[medal]
-    }))); 
+function render(md) {
+    let countryMedals = medals.flatMap((medal) => md.map((d) => ({
+            country: d.country, medal, count: d[medal]
+        }))); 
 
-let chart = StackedBarChart(countryMedals, {
-    x: d => d.count,
-    y: d => d.country,
-    z: d => d.medal,
-    yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
-    xLabel: " Total Medals Earned →",
-    zDomain: medals,
-    xDomain: [0,115],
-    colors: ["#ffd700", "#c0c0c0", "#b08d57"],
-    width: 1800,
-    height: 1000,
-    marginLeft:200,
-    marginRight:200
-});
-
-const key = Legend(chart.scales.color, {title: "Medal (color)"});
+    let chart = StackedBarChart(countryMedals, {
+        x: d => d.count,
+        y: d => d.country,
+        z: d => d.medal,
+        yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
+        xLabel: " Total Medals Earned →",
+        zDomain: medals,
+        xDomain: [0,115],
+        colors: colors,
+        width: width,
+        height: height,
+        marginLeft:200,
+        marginRight:200
+    });
+}
+render(medalsData.slice(0, 4));
 
 // Create empty list.
 let listItems = d3
@@ -51,27 +77,28 @@ let listItems = d3
 // Initialize checklist items.
 listItems
     .append('span')
-    .text((d)=> d.country)
+    .text((d) => d.country)
     .append('input')
     .attr('type', 'checkbox');
 
 // Initialize empty checklist.
 let unselectedIds = [];
-for (let i = 1; i <= medalsData.length; i++) {
+for (let i = 0; i < medalsData.length; i++) {
     unselectedIds.push(i.toString());
 }
 
 // Add event listener to checklist items.
-listItems
-    .on('change', (d1) => {
-        if (unselectedIds.indexOf(d1.rank) === -1) {
-            unselectedIds.push(d1.rank);
-        } else {
-            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
-        }
-        // Update selected data based on current selection.
-        selectedData = medalsData.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
-        renderChart();
+listItems                                                                           
+    .on('change', (d1) => {                                                         
+        if (unselectedIds.indexOf(d1.rank) === -1) {                                
+            unselectedIds.push(d1.rank);                                            
+        } else {                                                                    
+            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);           
+        }                                                                           
+        // Update selected data based on current selection.                         
+        selectedData = medalsData.filter((d2) => unselectedIds.indexOf(d2.rank) === -1); 
+        console.log('selectedData', selectedData);
+        render(medalsData.slice(5, 10));                                                              
     });
 
 // Copyright 2021 Observable, Inc.
@@ -152,14 +179,6 @@ function StackedBarChart(data, {
         title = i => T(O[i], i, data);
     }
 
-    const svg = d3
-        .select("#chart")
-        .select("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-
     svg.append("g")
         .attr("transform", `translate(0,${marginTop})`)
         .call(xAxis)
@@ -194,7 +213,7 @@ function StackedBarChart(data, {
         .attr("transform", `translate(${xScale(0)},0)`)
         .call(yAxis);
 
-    return Object.assign(svg.node(), {scales: {color}});
+    return Object.assign(svg.node());
 }
 
 // Copyright 2021, Observable Inc.
