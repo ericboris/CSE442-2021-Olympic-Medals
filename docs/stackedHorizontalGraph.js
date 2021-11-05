@@ -12,7 +12,6 @@ const METALS_DATA = (() => {
   });
   return md;
 })();
-console.log(METALS_DATA);
 
 medals = ['gold', 'silver', 'bronze'];
 
