@@ -850,10 +850,13 @@ chart = StackedBarChart(countryMedals, {
     yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
     xLabel: " Total Medals Earned →",
     zDomain: medals,
+    xDomain: [0,115],
     //colors: d3.schemeSpectral[medals.length],
     colors: ["#ffd700", "#c0c0c0", "#b08d57"],
-    width: 2000,
-    height: 2000
+    width: 1800,
+    height: 1000,
+    marginLeft:200,
+    marginRight:200
 })
 
 key = Legend(chart.scales.color, {title: "Medal (color)"});
@@ -905,8 +908,8 @@ function StackedBarChart(data, {
     marginTop = 30, // top margin, in pixels
     marginRight = 0, // right margin, in pixels
     marginBottom = 0, // bottom margin, in pixels
-    marginLeft = 200, // left margin, in pixels
-    width = 500, // outer width, in pixels
+    marginLeft = 100, // left margin, in pixels
+    width = 400, // outer width, in pixels
     height = 2000, // outer height, in pixels
     xType = d3.scaleLinear, // type of x-scale
     xDomain, // [xmin, xmax]

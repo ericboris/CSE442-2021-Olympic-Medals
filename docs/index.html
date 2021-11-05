@@ -79,15 +79,16 @@
                 list-style-type: none;
             }
             #chart {
-                width: 120vw;
-                overflow-y: scroll;
-                heigh: 100vw;
+                width: 180%;
+                margin-left: -30%;
+                height: 150%;
             }
-            #chart-outer {
-                max-height: 60vw;
-                overflow-y: scroll;
-            }
+            /*#chart-outer {*/
+            /*    max-height: 100%;*/
+            /*    overflow-y: scroll;*/
+            /*}*/
         </style>
+
         <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
         <script lang="javascript" src="https://d3js.org/d3-axis.v1.min.js" defer></script>
@@ -108,11 +109,11 @@
 
             <section>
                 <em>[Add: your visualization]</em>
-                <div id="chart-outer">
+<!--                <div id="chart-outer">-->
                     <div id="chart">
                         <svg></svg>
                     </div>
-                </div>
+<!--                </div>-->
 
                 <div id="legend">
                     <svg></svg>
