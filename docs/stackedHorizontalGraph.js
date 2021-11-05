@@ -909,7 +909,7 @@ function StackedBarChart(data, {
     marginRight = 0, // right margin, in pixels
     marginBottom = 0, // bottom margin, in pixels
     marginLeft = 100, // left margin, in pixels
-    width = 400, // outer width, in pixels
+    width = 1000, // outer width, in pixels
     height = 2000, // outer height, in pixels
     xType = d3.scaleLinear, // type of x-scale
     xDomain, // [xmin, xmax]
