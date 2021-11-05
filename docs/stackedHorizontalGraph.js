@@ -13,11 +13,14 @@ const METALS_DATA = (() => {
   return md;
 })();
 
-medals = ['gold', 'silver', 'bronze'];
 
-countryMedals = medals.flatMap(medal => METALS_DATA.map(d => ({country: d.country, medal, count: d[medal]}))); // pivot longer
+const medals = ['gold', 'silver', 'bronze'];
 
-chart = StackedBarChart(countryMedals, {
+// Create an object of countries and number of medals of a given type earned
+// for each type of medal. 
+const countryMedals = medals.flatMap(medal => METALS_DATA.map(d => ({country: d.country, medal, count: d[medal]}))); // pivot longer
+
+let chart = StackedBarChart(countryMedals, {
     x: d => d.count,
     y: d => d.country,
     z: d => d.medal,
@@ -32,7 +35,7 @@ chart = StackedBarChart(countryMedals, {
     marginRight:200
 });
 
-key = Legend(chart.scales.color, {title: "Medal (color)"});
+const key = Legend(chart.scales.color, {title: "Medal (color)"});
 
 // Create empty list.
 const listItems = d3
@@ -45,7 +48,7 @@ const listItems = d3
     .append('li');
 
 // Initialize checklist items.
-listItems
+let listItems
     .append('span')
     .text((d)=> d.country)
     .append('input')
