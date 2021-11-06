@@ -1,26 +1,26 @@
 // Load medals.json data from GitHub repo.
 const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
 const medalsData = (() => {
-  var md = null;
+  var medalsData = null;
   $.ajax({
     'async': false,
     'url': url, 
     'dataType': "json",
     'success': (data) => {
-      md = data;
+      medalsData = data;
     }
   });
-  return md;
+  return medalsData;
 })();
 
-let selectedData = [];
+// Define constants
 const medals = ['gold', 'silver', 'bronze'];
 const colors = ["#ffd700", "#c0c0c0", "#b08d57"];
-
-// Render blank chart
 const width = 1800;
 const height = 1000;
-let svg = d3
+
+// Render blank chart
+const svg = d3
     .select("#chart")
     .select("svg")
     .attr("width", width)
@@ -28,7 +28,18 @@ let svg = d3
     .attr("viewBox", [0, 0, width, height])
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
+// Render legend
 const key = Legend(d3.scaleOrdinal(medals, colors), {title: "Medal (color)"});
+
+let selectedCountryData = [];
+render(medalsData.slice(0, 4));
+
+// Initialize empty checklist.
+    let deselectedCountries = [];
+    for (let i = 0; i < medalsData.length; i++) {
+        deselectedCountries.push(medalsData[i].country);
+    }
+createCheckList();
 
 // TODO Make this clear the svg for redrawing new chart.
 function clear() {
@@ -62,44 +73,44 @@ function render(md) {
         marginRight:200
     });
 }
-render(medalsData.slice(0, 4));
 
-// Create empty list.
-let listItems = d3
-    .select('#data')
-    .classed('scrollCheckbox', true)
-    .select('ul')
-    .selectAll('li')
-    .data(medalsData)
-    .enter()
-    .append('li');
+function createCheckList() { 
+    // Create scroll box containing n=medalsData.length empty list tags.
+    let listItems = d3
+        .select('#data')
+        .classed('scrollCheckbox', true)
+        .select('ul')
+        .selectAll('li')
+        .data(medalsData, d => d.country)
+        .enter()
+        .append('li');
 
-// Initialize checklist items.
-listItems
-    .append('span')
-    .text((d) => d.country)
-    .append('input')
-    .attr('type', 'checkbox');
+    // Append to each list tag an event listener.
+    // If box is unchecked remove country data object from selectedCountryData
+    // and add country name to deselectedCountries.
+    // If box is checked do the opposite.
+    // Put this before adding a country name so checkbox is left of name.
+    listItems                                                                           
+        .append('input')
+        .attr('type', 'checkbox')
+        .on('change', (event) => {                                                         
+            let country = event.currentTarget.__data__.country;
+            if (!event.currentTarget.checked) {
+                // Prevent adding duplicates.
+                if (deselectedCountries.indexOf(country) === -1) {
+                    deselectedCountries.push(country);
+                }
+            } else {
+                deselectedCountries = deselectedCountries.filter((c) => c !== country);
+            }
+            selectedCountryData = medalsData.filter((obj) => deselectedCountries.indexOf(obj.country) === -1);
+        });
 
-// Initialize empty checklist.
-let unselectedIds = [];
-for (let i = 0; i < medalsData.length; i++) {
-    unselectedIds.push(i.toString());
+    // Append to each list tag a country's name.
+    listItems
+        .append('span')
+        .text((d) => ' ' + d.country)
 }
-
-// Add event listener to checklist items.
-listItems                                                                           
-    .on('change', (d1) => {                                                         
-        if (unselectedIds.indexOf(d1.rank) === -1) {                                
-            unselectedIds.push(d1.rank);                                            
-        } else {                                                                    
-            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);           
-        }                                                                           
-        // Update selected data based on current selection.                         
-        selectedData = medalsData.filter((d2) => unselectedIds.indexOf(d2.rank) === -1); 
-        console.log('selectedData', selectedData);
-        render(medalsData.slice(5, 10));                                                              
-    });
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
