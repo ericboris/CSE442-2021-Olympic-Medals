@@ -1,77 +1,117 @@
 // Load medals.json data from GitHub repo.
-const METALS_DATA = (() => {
-  var md = null;
+const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+const medalsData = (() => {
+  var medalsData = null;
   $.ajax({
     'async': false,
-    'global': false,
-    'url': "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6",
+    'url': url, 
     'dataType': "json",
     'success': (data) => {
-      md = data;
+      medalsData = data;
     }
   });
-  return md;
+  return medalsData;
 })();
 
-
+// Define constants
 const medals = ['gold', 'silver', 'bronze'];
+const colors = ["#ffd700", "#c0c0c0", "#b08d57"];
+const width = 1800;
+const height = 1000;
 
-// Create an object of countries and number of medals of a given type earned
-// for each type of medal. 
-const countryMedals = medals.flatMap(medal => METALS_DATA.map(d => ({country: d.country, medal, count: d[medal]}))); // pivot longer
+// Render blank chart
+const svg = d3
+    .select("#chart")
+    .select("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
-let chart = StackedBarChart(countryMedals, {
-    x: d => d.count,
-    y: d => d.country,
-    z: d => d.medal,
-    yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
-    xLabel: " Total Medals Earned →",
-    zDomain: medals,
-    xDomain: [0,115],
-    colors: ["#ffd700", "#c0c0c0", "#b08d57"],
-    width: 1800,
-    height: 1000,
-    marginLeft:200,
-    marginRight:200
-});
-
-const key = Legend(chart.scales.color, {title: "Medal (color)"});
-
-// Create empty list.
-const listItems = d3
-    .select('#data')
-    .classed('scrollCheckbox', true)
-    .select('ul')
-    .selectAll('li')
-    .data(METALS_DATA)
-    .enter()
-    .append('li');
-
-// Initialize checklist items.
-let listItems
-    .append('span')
-    .text((d)=> d.country)
-    .append('input')
-    .attr('type', 'checkbox');
+// Render legend
+const key = Legend(d3.scaleOrdinal(medals, colors), {title: "Medal (color)"});
 
 // Initialize empty checklist.
-let unselectedIds = [];
-for (let i = 1; i <= METALS_DATA.length; i++) {
-    unselectedIds.push(i.toString());
+let deselectedCountries = [];
+for (let i = 0; i < medalsData.length; i++) {
+    deselectedCountries.push(medalsData[i].country);
+}
+createCheckList();
+
+let selectedCountryData = [];
+
+// Clears the graph
+function clear() {
+    d3
+    .select("#chart")
+    .select("svg")
+    .selectAll("svg > *")
+    .remove();
 }
 
-// Add event listener to checklist items.
-listItems
-    .on('change', (d1) => {
-        if (unselectedIds.indexOf(d1.rank) === -1) {
-            unselectedIds.push(d1.rank);
-        } else {
-            unselectedIds = unselectedIds.filter((id) => id !== d1.rank);
-        }
-        // Update selected data based on current selection.
-        selectedData = METALS_DATA.filter((d2) => unselectedIds.indexOf(d2.rank) === -1);
-        renderChart();
+// Create an collection of objects containing countries, medal type, and number 
+// of medals of that type for each type of medal. 
+function render(md) {
+    let countryMedals = medals.flatMap((medal) => md.map((d) => ({
+            country: d.country, medal, count: d[medal]
+        }))); 
+
+    let chart = StackedBarChart(countryMedals, {
+        x: d => d.count,
+        y: d => d.country,
+        z: d => d.medal,
+        yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
+        xLabel: " Total Medals Earned →",
+        yLabel: "Country",
+        zDomain: medals,
+        xDomain: [0,115],
+        colors: colors,
+        width: width,
+        height: height,
+        marginLeft:200,
+        marginRight:200
     });
+}
+
+function createCheckList() { 
+    // Create scroll box containing n=medalsData.length empty list tags.
+    let listItems = d3
+        .select('#data')
+        .classed('scrollCheckbox', true)
+        .select('ul')
+        .selectAll('li')
+        .data(medalsData, d => d.country)
+        .enter()
+        .append('li');
+
+    // Append to each list tag an event listener.
+    // If box is unchecked remove country data object from selectedCountryData
+    // and add country name to deselectedCountries.
+    // If box is checked do the opposite.
+    // Put this before adding a country name so checkbox is left of name.
+    listItems                                                                           
+        .append('input')
+        .attr('type', 'checkbox')
+        .on('change', (event) => {                                                         
+            let country = event.currentTarget.__data__.country;
+            if (!event.currentTarget.checked) {
+                // Prevent adding duplicates.
+                if (deselectedCountries.indexOf(country) === -1) {
+                    deselectedCountries.push(country);
+                }
+            } else {
+                deselectedCountries = deselectedCountries.filter((c) => c !== country);
+            }
+            selectedCountryData = medalsData.filter((obj) => deselectedCountries.indexOf(obj.country) === -1);
+            clear();
+            render(selectedCountryData);
+        });
+
+    // Append to each list tag a country's name.
+    listItems
+        .append('span')
+        .text((d) => ' ' + d.country)
+}
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
@@ -151,14 +191,6 @@ function StackedBarChart(data, {
         title = i => T(O[i], i, data);
     }
 
-    const svg = d3
-        .select("#chart")
-        .select("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-
     svg.append("g")
         .attr("transform", `translate(0,${marginTop})`)
         .call(xAxis)
@@ -193,7 +225,7 @@ function StackedBarChart(data, {
         .attr("transform", `translate(${xScale(0)},0)`)
         .call(yAxis);
 
-    return Object.assign(svg.node(), {scales: {color}});
+    return Object.assign(svg.node());
 }
 
 // Copyright 2021, Observable Inc.
