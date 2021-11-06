@@ -31,23 +31,21 @@ const svg = d3
 // Render legend
 const key = Legend(d3.scaleOrdinal(medals, colors), {title: "Medal (color)"});
 
-let selectedCountryData = [];
-render(medalsData.slice(0, 4));
-
 // Initialize empty checklist.
-    let deselectedCountries = [];
-    for (let i = 0; i < medalsData.length; i++) {
-        deselectedCountries.push(medalsData[i].country);
-    }
+let deselectedCountries = [];
+for (let i = 0; i < medalsData.length; i++) {
+    deselectedCountries.push(medalsData[i].country);
+}
 createCheckList();
 
-// TODO Make this clear the svg for redrawing new chart.
+let selectedCountryData = [];
+
+// Clears the graph
 function clear() {
     d3
     .select("#chart")
     .select("svg")
-    .selectAll("g")
-    .exit()
+    .selectAll("svg > *")
     .remove();
 }
 
@@ -64,6 +62,7 @@ function render(md) {
         z: d => d.medal,
         yDomain: d3.groupSort(countryMedals, D => d3.sum(D, d => d.count), d => d.country),
         xLabel: " Total Medals Earned →",
+        yLabel: "Country",
         zDomain: medals,
         xDomain: [0,115],
         colors: colors,
@@ -104,6 +103,8 @@ function createCheckList() {
                 deselectedCountries = deselectedCountries.filter((c) => c !== country);
             }
             selectedCountryData = medalsData.filter((obj) => deselectedCountries.indexOf(obj.country) === -1);
+            clear();
+            render(selectedCountryData);
         });
 
     // Append to each list tag a country's name.
