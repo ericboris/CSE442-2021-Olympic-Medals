@@ -50,6 +50,7 @@ function clear() {
 }
 
 //render the initial blank graph
+// TODO Passing empty list throws TypeError: destructured parameter
 render([])
 
 // Create an collection of objects containing countries, medal type, and number 
@@ -203,7 +204,7 @@ function StackedBarChart(data, {
     // Compute titles.
     if (title === undefined) {
         const formatValue = xScale.tickFormat(100, xFormat);
-        title = i => `${Y[i]}\n${Z[i]}\n${formatValue(X[i])}`;
+        title = i => `${Y[i]}\n${Z[i]}: ${formatValue(X[i])}`;
     } else {
         const O = d3.map(data, d => d);
         const T = title;
