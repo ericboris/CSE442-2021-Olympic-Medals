@@ -49,13 +49,16 @@ function clear() {
     .remove();
 }
 
+//render the initial blank graph
+render([])
+
 // Create an collection of objects containing countries, medal type, and number 
 // of medals of that type for each type of medal. 
 function render(md) {
     let countryMedals = medals.flatMap((medal) => md.map((d) => ({
             country: d.country, medal, count: d[medal]
         }))); 
-
+    
     let chart = StackedBarChart(countryMedals, {
         x: d => d.count,
         y: d => d.country,
@@ -64,13 +67,29 @@ function render(md) {
         xLabel: " Total Medals Earned →",
         yLabel: "Country",
         zDomain: medals,
-        xDomain: [0,115],
+        xDomain: [0, findMax(md)],
         colors: colors,
         width: width,
         height: height,
         marginLeft:200,
         marginRight:200
     });
+}
+
+// Function to find the max total medals and resizing the graph with that.
+// Doesn't work with the USA only and I'm not sure why
+function findMax(md) {
+    let max = 0;
+    if (md.length > 0) {
+        for (let i = 0; i < md.length; i++) {
+            if (md[i].total > max) {
+                max = md[i].total
+            }
+        } 
+    } else {
+        max = 20
+    }
+    return max
 }
 
 function createCheckList() { 
