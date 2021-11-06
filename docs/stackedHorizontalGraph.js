@@ -16,8 +16,8 @@ const medalsData = (() => {
 // Define constants
 const medals = ['gold', 'silver', 'bronze'];
 const colors = ["#ffd700", "#c0c0c0", "#b08d57"];
-const width = 1800;
-const height = 1000;
+const width = 776;
+const height = 480;
 
 // Render blank chart
 const svg = d3
@@ -72,8 +72,8 @@ function render(md) {
         colors: colors,
         width: width,
         height: height,
-        marginLeft:200,
-        marginRight:200
+        marginLeft:50,
+        marginRight:50
     });
 }
 
