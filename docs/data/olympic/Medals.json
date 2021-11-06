@@ -1,7 +1,7 @@
 [
 	{
 		"rank": "1",
-		"country": "United States of America",
+		"country": "USA",
 		"gold": "39",
 		"silver": "41",
 		"bronze": "33",
@@ -10,7 +10,7 @@
 	},
 	{
 		"rank": "2",
-		"country": "People's Republic of China",
+		"country": "China",
 		"gold": "38",
 		"silver": "32",
 		"bronze": "18",
@@ -28,7 +28,7 @@
 	},
 	{
 		"rank": "4",
-		"country": "Great Britain",
+		"country": "Britain",
 		"gold": "22",
 		"silver": "21",
 		"bronze": "22",
@@ -37,7 +37,7 @@
 	},
 	{
 		"rank": "5",
-		"country": "ROC",
+		"country": "Russia",
 		"gold": "20",
 		"silver": "28",
 		"bronze": "23",
@@ -136,7 +136,7 @@
 	},
 	{
 		"rank": "16",
-		"country": "Republic of Korea",
+		"country": "South Korea",
 		"gold": "6",
 		"silver": "4",
 		"bronze": "10",
@@ -235,7 +235,7 @@
 	},
 	{
 		"rank": "27",
-		"country": "Islamic Republic of Iran",
+		"country": "Iran",
 		"gold": "3",
 		"silver": "2",
 		"bronze": "2",
@@ -298,7 +298,7 @@
 	},
 	{
 		"rank": "34",
-		"country": "Chinese Taipei",
+		"country": "Taipei",
 		"gold": "2",
 		"silver": "4",
 		"bronze": "6",
@@ -433,7 +433,7 @@
 	},
 	{
 		"rank": "49",
-		"country": "Hong Kong, China",
+		"country": "Hong Kong",
 		"gold": "1",
 		"silver": "2",
 		"bronze": "3",
@@ -712,7 +712,7 @@
 	},
 	{
 		"rank": "77",
-		"country": "North Macedonia",
+		"country": "Macedonia",
 		"gold": "0",
 		"silver": "1",
 		"bronze": "0",
@@ -820,7 +820,7 @@
 	},
 	{
 		"rank": "86",
-		"country": "Republic of Moldova",
+		"country": "Moldova",
 		"gold": "0",
 		"silver": "0",
 		"bronze": "1",
@@ -829,7 +829,7 @@
 	},
 	{
 		"rank": "86",
-		"country": "Syrian Arab Republic",
+		"country": "Syria",
 		"gold": "0",
 		"silver": "0",
 		"bronze": "1",
