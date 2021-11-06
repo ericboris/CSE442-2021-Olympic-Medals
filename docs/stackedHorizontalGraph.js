@@ -78,19 +78,19 @@ function render(md) {
 }
 
 // Function to find the max total medals and resizing the graph with that.
-// Doesn't work with the USA only and I'm not sure why
 function findMax(md) {
     let max = 0;
-    if (md.length > 0) {
-        for (let i = 0; i < md.length; i++) {
-            if (md[i].total > max) {
-                max = md[i].total
-            }
-        } 
-    } else {
-        max = 20
-    }
-    return max
+    for (let i = 0; i < md.length; i++) {
+        let total = md[i].total;
+        // Short circuit to avoid max bug.        
+        if (total > 100) {
+            return total;
+        }
+        if (total > max) {
+            max = total;
+        }
+    } 
+    return max > 0 ? max : 20;
 }
 
 function createCheckList() { 
