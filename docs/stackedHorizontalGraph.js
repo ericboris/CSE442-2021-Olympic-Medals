@@ -14,7 +14,7 @@ const medalsData = (() => {
 })();
 
 // Define constants
-const medals = ['gold', 'silver', 'bronze'];
+const medals = ['Gold', 'Silver', 'Bronze'];
 const colors = ["#fdcc0d", "#c0c0c0", "#b88608"];
 const width = 776;
 const height = 480;
