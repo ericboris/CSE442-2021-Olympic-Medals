@@ -16,8 +16,10 @@ const medalsData = (() => {
 // Define constants
 const medals = ['gold', 'silver', 'bronze'];
 const colors = ["#fdcc0d", "#c0c0c0", "#b88608"];
-const width = 776;
-const height = 480;
+const width = 800;
+const height = 450;
+// Consider a range of heights between 50 for only one country selected 
+// And 900 with all countries selected.
 
 // Render blank chart
 const svg = d3
@@ -101,8 +103,8 @@ function render(md) {
         colors: colors,
         width: width,
         height: height,
-        marginLeft:50,
-        marginRight:50
+        marginLeft:100,
+        marginRight:0
     });
 }
 
