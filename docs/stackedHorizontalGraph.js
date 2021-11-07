@@ -33,12 +33,41 @@ const key = Legend(d3.scaleOrdinal(medals, colors), {title: "Medal (color)"});
 
 // Initialize empty checklist.
 let deselectedCountries = [];
-for (let i = 0; i < medalsData.length; i++) {
-    deselectedCountries.push(medalsData[i].country);
+function fillDeselectedCountries() {
+    for (let i = 0; i < medalsData.length; i++) {
+        deselectedCountries.push(medalsData[i].country);
+    }
 }
+fillDeselectedCountries();
+
 createCheckList();
 
 let selectedCountryData = [];
+
+// Add a select button.
+const selectButton = d3
+    .select("#buttons")
+    .select("#select")
+    .on("click", (event) => {
+        d3
+            .selectAll('input')
+            .property('checked', true);
+        deselectedCountries = [];
+        clear();
+        render(medalsData);
+    });
+
+// Add a deselect button.
+const deselectButton = d3
+    .select("#buttons")
+    .select("#deselect")
+    .on("click", (event) => {
+        d3.selectAll('input')
+            .property('checked', false);
+        fillDeselectedCountries();
+        clear();
+        render([]);
+    });
 
 // Clears the graph
 function clear() {
