@@ -101,8 +101,8 @@ function render(md) {
         colors: colors,
         width: width,
         height: height,
-        marginLeft:50,
-        marginRight:50
+        marginLeft:100,
+        marginRight:0
     });
 }
 
