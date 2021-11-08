@@ -1,182 +1,183 @@
 <!DOCTYPE HTML>
 <html xml:lang="en" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>CSE442 | A3</title>
-        <style media="all">
-            * { padding: 0; margin: 0; }
-            body {
-                margin: 0 auto 0 auto;
-                padding: 0;
-                max-width: 1000px;
-                font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
-                font-size: 0.95em;
-            }
-            a, a:visited { text-decoration: none; color: #7533f4; }
-            a:hover { text-decoration: underline; color: #f4b014; }
-            h1, h2, h3, h4, h5 {
-                color: #492a7c;
-                background-color: inherit;
-                font-weight: normal;
-                padding: 0 0 5px 0;
-                margin: 15px 0 0 0;
-                border: none;
-                clear: right;
-            }
-            h1 { font-size: 24pt; margin:  5px 0 10px 0; line-height: 28px; }
-            h2 { font-size: 14pt; margin: 30px 0 15px 0; letter-spacing: 0.01em; border-bottom: 1px solid #ccc;  line-height: 20px;}
-            h3 { font-size: 13pt; }
-            h4 { font-size: 12pt; }
-            h5 { font-size: 11pt; }
-            p { margin: 0 0 10px 0; }
-            .content {
-                margin: 0;
-                padding: 15px 20px;
-                background-color: #ffffff;
-            }
-            .title h1, .title a {
-                color: #492a7c;
-                font-size: 24pt;
-                margin-bottom: 20px;
-                margin-top: 5px;
-            }
-            .title {
-                color: #492a7c;
-                font-size: 8pt;
-                margin-bottom: 5px;
-                margin-top: 8px;
-            }
-            .footer {
-                border-top: 1px solid #ccc;
-                margin-top: 30px;
-                padding-top: 4px;
-                text-align: right;
-                font-size: 12px;
-            }
-            .footer a {
-                color: #21346B;
-            }
-            .footer a:hover {
-                color: #ce3333;
-            }
-            .scrollCheckbox {
-                border:2px solid #ccc;
-                width:300px;
-                height: 100px;
-                overflow-y: scroll;
+<head>
+    <meta charset="UTF-8">
+    <title>CSE442 | A3</title>
+    <style media="all">
+        * { padding: 0; margin: 0; }
+        body {
+            margin: 0 auto 0 auto;
+            padding: 0;
+            max-width: 1000px;
+            font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
+            font-size: 0.95em;
+        }
+        a, a:visited { text-decoration: none; color: #7533f4; }
+        a:hover { text-decoration: underline; color: #f4b014; }
+        h1, h2, h3, h4, h5 {
+            color: #492a7c;
+            background-color: inherit;
+            font-weight: normal;
+            padding: 0 0 5px 0;
+            margin: 15px 0 0 0;
+            border: none;
+            clear: right;
+        }
+        h1 { font-size: 24pt; margin:  5px 0 10px 0; line-height: 28px; }
+        h2 { font-size: 14pt; margin: 30px 0 15px 0; letter-spacing: 0.01em; border-bottom: 1px solid #ccc;  line-height: 20px;}
+        h3 { font-size: 13pt; }
+        h4 { font-size: 12pt; }
+        h5 { font-size: 11pt; }
+        p { margin: 0 0 10px 0; }
+        .content {
+            margin: 0;
+            padding: 15px 20px;
+            background-color: #ffffff;
+        }
+        .title h1, .title a {
+            color: #492a7c;
+            font-size: 24pt;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+        .title {
+            color: #492a7c;
+            font-size: 8pt;
+            margin-bottom: 5px;
+            margin-top: 8px;
+        }
+        .footer {
+            border-top: 1px solid #ccc;
+            margin-top: 30px;
+            padding-top: 4px;
+            text-align: right;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #21346B;
+        }
+        .footer a:hover {
+            color: #ce3333;
+        }
+        .scrollCheckbox {
+            border:2px solid #ccc;
+            width:300px;
+            height: 100px;
+            overflow-y: scroll;
 
-            }
-            .container {
-                width: 250px;
-                height: 200px;
-                border: 1px solid #720570;
-            }
+        }
+        .container {
+            width: 250px;
+            height: 200px;
+            border: 1px solid #720570;
+        }
 
-            .bar {
-                fill: #720570;
-            }
-            ul{
-                list-style-type: none;
-            }
-            #chart {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
+        .bar {
+            fill: #720570;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #chart {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 
-        <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
-        <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
-        <script lang="javascript" src="https://d3js.org/d3-axis.v1.min.js" defer></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="stackedHorizontalGraph.js" defer></script>
-    </head>
-    <body>
-        <div class="content">
-            <section class="title">
-            <a href="/">Results of The 2021 Olympics By Countries</a>
-            </section>
+    <script lang="javascript" src="https://d3js.org/d3.v7.min.js" defer></script>
+    <script lang="javascript" src="https://d3js.org/d3-scale.v3.min.js" defer></script>
+    <script lang="javascript" src="https://d3js.org/d3-axis.v1.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="stackedHorizontalGraph.js" defer></script>
+</head>
+<body>
+<div class="content">
+    <section class="title">
+        <a href="/">Results of The 2021 Olympics By Countries</a>
+    </section>
 
-            <section>
-            <p>
-                <strong>Team Members</strong>: Alyssa Cote , Eric Boris, An Nguyen
-            </p>
-            </section>
+    <section>
+        <p>
+            <strong>Team Members</strong>: Alyssa Cote , Eric Boris, An Nguyen
+        </p>
+    </section>
 
-            <section>
-                <h3>How many medals did each country win in the 2021 Olympics?</h2>
-                    <div id="chart">
-                        <svg></svg>
-                    </div>
-
-                <div id="legend">
-                    <svg></svg>
-                </div>
-                <div id="data">
-                    <ul></ul>
-                </div>
-                <div id="buttons">
-                    <button type="button" id="deselect">Deselect All</button>
-                    <button type="button" id="select">Select All</button>
-                </div>
-            </section>
-
-            <section>
-                <h2>Design Decisions</h2>
-                <em>
-                    [Add: a rationale for your design decisions.
-                    How did you choose your particular visual encodings and interaction techniques?
-                    What alternatives did you consider and how did you arrive at your ultimate choices?]
-                </em>
-                <div>
-                    Eric:
-                </div>
-            </section>
-
-            <section>
-            <h2>Development Process</h2>
-                <em>
-                    [Add: describe how the work was split among the team members.
-                    Include a commentary on the development process, including answers to the following questions: 
-                    Roughly how much time did you spend developing your application (in people-hours)? 
-                    What aspects took the most time?]
-                </em>
-                <div>
-                    Eric: We decided to use olympic 2021 data with the expectation of showing a selectable world
-                    map which when selected showed multiple bar graphs of how many medals the selected countries
-                    had taken in the 2021 olympics. 
-                    I began by trying to show a basic vertical bar graph of dummy data. 
-                    That took some effort since this was my first time using D3. 
-                    Then I connected the medals data with this graph. 
-                    At that time we were showing only a subset of the olympic data on this basic graph.
-                    We decided not to use multiple graphs and instead use a stacked bar chart.
-                    We engaged in group programming to implement a vertical stacked bar chart from a tutorial.
-                    Shortly after we switched to using a horizontal bar chart. 
-                    With that in place we had a scrolling selection bar of countries that could be selected/deselected,
-                    a legend, and a stacked horiontal bar chart. 
-                    I first worked to remove the embedded JSON data from the file, it took up over 800 lines and 
-                    made working in the file cumbersome. 
-                    This took a surprising amount of time.
-                    Similarly I removed code we weren't using from Legend function.  
-                    Then I worked on minor parts, variable name clean up, naming consistency, 
-                    tool tip reformatting, adjusting graph positioning, margins, scale, and colors. 
-                    One peculiar bug we encountered is worth noting. 
-                    We were dynamically scaling the graph x axis to match the maximimum bar length. 
-                    However, when USA was selected the graph was scaling to the second largest bar length.
-                    I couldn't solve the bug directly and added short circuit code instead. 
-                    I added select and deselect all buttons for ease of use and a few smaller margin/positioning updates. 
-                    All told, my biggest contributions were getting an initial graph connected to the data and index.html,
-                    get initial select/deselct working,
-                    removing the JSON from the file took longer than it should have, breaking key features into functions
-                    so that we could hide/show selections, connect the list selection to actually hide show, fix the max
-                    bug, and add select and deselect buttons.
-                    I estimate that I've spend ~20+ hours on this assignment. 
-                </div>
-            </section>
-
-            <div class="footer">
-                <a href="https://courses.cs.washington.edu/courses/cse442/21au/">CSE 442 Data Visualization</a>
-                <a href="http://www.washington.edu">University of Washington</a>
+    <section>
+        <h2>How many medals did each country win in the 2021 Olympics?</h2>
+            <div id="chart">
+                <svg></svg>
             </div>
-        </div>
-    </body>
-</html> 
+
+            <div id="legend">
+                <svg></svg>
+            </div>
+            <div id="data">
+                <ul></ul>
+            </div>
+            <div id="buttons">
+                <button type="button" id="deselect">Deselect All</button>
+                <button type="button" id="select">Select All</button>
+            </div>
+    </section>
+
+        <section>
+            <h2>Design Decisions</h2>
+            <em>
+                [Add: a rationale for your design decisions.
+                How did you choose your particular visual encodings and interaction techniques?
+                What alternatives did you consider and how did you arrive at your ultimate choices?]
+            </em>
+            <div>
+                Eric:
+            </div>
+        </section>
+
+        <section>
+        <h2>Development Process</h2>
+            <em>
+                [Add: describe how the work was split among the team members.
+                Include a commentary on the development process, including answers to the following questions: 
+                Roughly how much time did you spend developing your application (in people-hours)? 
+                What aspects took the most time?]
+            </em>
+            <div>
+                Eric: We decided to use olympic 2021 data with the expectation of showing a selectable world
+                map which when selected showed multiple bar graphs of how many medals the selected countries
+                had taken in the 2021 olympics. 
+                I began by trying to show a basic vertical bar graph of dummy data. 
+                That took some effort since this was my first time using D3. 
+                Then I connected the medals data with this graph. 
+                At that time we were showing only a subset of the olympic data on this basic graph.
+                We decided not to use multiple graphs and instead use a stacked bar chart.
+                We engaged in group programming to implement a vertical stacked bar chart from a tutorial.
+                Shortly after we switched to using a horizontal bar chart. 
+                With that in place we had a scrolling selection bar of countries that could be selected/deselected,
+                a legend, and a stacked horiontal bar chart. 
+                I first worked to remove the embedded JSON data from the file, it took up over 800 lines and 
+                made working in the file cumbersome. 
+                This took a surprising amount of time.
+                Similarly I removed code we weren't using from Legend function.  
+                Then I worked on minor parts, variable name clean up, naming consistency, 
+                tool tip reformatting, adjusting graph positioning, margins, scale, and colors. 
+                One peculiar bug we encountered is worth noting. 
+                We were dynamically scaling the graph x axis to match the maximimum bar length. 
+                However, when USA was selected the graph was scaling to the second largest bar length.
+                I couldn't solve the bug directly and added short circuit code instead. 
+                I added select and deselect all buttons for ease of use and a few smaller margin/positioning updates. 
+                All told, my biggest contributions were getting an initial graph connected to the data and index.html,
+                get initial select/deselct working,
+                removing the JSON from the file took longer than it should have, breaking key features into functions
+                so that we could hide/show selections, connect the list selection to actually hide show, fix the max
+                bug, and add select and deselect buttons.
+                I estimate that I've spend ~20+ hours on this assignment. 
+            </div>
+        </section>
+
+
+    <div class="footer">
+        <a href="https://courses.cs.washington.edu/courses/cse442/21au/">CSE 442 Data Visualization</a>
+        <a href="http://www.washington.edu">University of Washington</a>
+    </div>
+</div>
+</body>
+</html>
