@@ -127,6 +127,9 @@
                     How did you choose your particular visual encodings and interaction techniques?
                     What alternatives did you consider and how did you arrive at your ultimate choices?]
                 </em>
+                <div>
+                    Eric:
+                </div>
             </section>
 
             <section>
@@ -137,6 +140,37 @@
                     Roughly how much time did you spend developing your application (in people-hours)? 
                     What aspects took the most time?]
                 </em>
+                <div>
+                    Eric: We decided to use olympic 2021 data with the expectation of showing a selectable world
+                    map which when selected showed multiple bar graphs of how many medals the selected countries
+                    had taken in the 2021 olympics. 
+                    I began by trying to show a basic vertical bar graph of dummy data. 
+                    That took some effort since this was my first time using D3. 
+                    Then I connected the medals data with this graph. 
+                    At that time we were showing only a subset of the olympic data on this basic graph.
+                    We decided not to use multiple graphs and instead use a stacked bar chart.
+                    We engaged in group programming to implement a vertical stacked bar chart from a tutorial.
+                    Shortly after we switched to using a horizontal bar chart. 
+                    With that in place we had a scrolling selection bar of countries that could be selected/deselected,
+                    a legend, and a stacked horiontal bar chart. 
+                    I first worked to remove the embedded JSON data from the file, it took up over 800 lines and 
+                    made working in the file cumbersome. 
+                    This took a surprising amount of time.
+                    Similarly I removed code we weren't using from Legend function.  
+                    Then I worked on minor parts, variable name clean up, naming consistency, 
+                    tool tip reformatting, adjusting graph positioning, margins, scale, and colors. 
+                    One peculiar bug we encountered is worth noting. 
+                    We were dynamically scaling the graph x axis to match the maximimum bar length. 
+                    However, when USA was selected the graph was scaling to the second largest bar length.
+                    I couldn't solve the bug directly and added short circuit code instead. 
+                    I added select and deselect all buttons for ease of use and a few smaller margin/positioning updates. 
+                    All told, my biggest contributions were getting an initial graph connected to the data and index.html,
+                    get initial select/deselct working,
+                    removing the JSON from the file took longer than it should have, breaking key features into functions
+                    so that we could hide/show selections, connect the list selection to actually hide show, fix the max
+                    bug, and add select and deselect buttons.
+                    I estimate that I've spend ~20+ hours on this assignment. 
+                </div>
             </section>
 
             <div class="footer">
