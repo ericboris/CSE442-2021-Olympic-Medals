@@ -18,7 +18,6 @@ const medals = ['gold', 'silver', 'bronze'];
 const colors = ["#fdcc0d", "#c0c0c0", "#b88608"];
 const width = 800;
 const height = 820;
-const percentModifier = 0.05;
 // Consider a range of heights between 50 for only one country selected
 // And 900 with all countries selected.
 
@@ -127,10 +126,16 @@ function findMax(md) {
 
 //Function to increase the max domain of x-axis to include the total max value of medals.
 function maxDomainModifier(max) {
-    let percentToAdd = Number(max)*Number(percentModifier);
-    percentToAdd = percentToAdd > 3 ? 10 : percentToAdd > 1? 5 : 1;
-    let maxDomain = Number(percentToAdd) + Number(max);
-    return maxDomain;
+    const percentModifier = 0.05;
+    let percentToAdd = Number(max) * Number(percentModifier);
+    if (percentToAdd > 3) {
+        percentToAdd = 10;
+    } else if (percentToAdd > 1) {
+        percentToAdd = 5;
+    } else {
+        percentToAdd = 1;
+    }
+    return Number(percentToAdd) + Number(max);
 }
 
 function createCheckList() {
