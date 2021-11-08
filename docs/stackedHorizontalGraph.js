@@ -111,17 +111,25 @@ function render(md) {
 // Function to find the max total medals.
 function findMax(md) {
     let max = 0;
+    let countryName = null;
+    console.log(md);
     for (let i = 0; i < md.length; i++) {
-        let total = md[i].total;
+
         // Short circuit to avoid max bug.
-        if (total > 100) {
-            return total;
+        // if (total > 100) {
+        //    return total;
+        // }
+        if (parseInt(md[i].total) > max) {
+            max = parseInt(md[i].total);
+
         }
-        if (total > max) {
-            max = total;
-        }
+
     }
-    return max > 0 ? max : 20;
+    let result = max > 0 ? max : 20;
+    console.log("max found: ", result);
+
+
+    return result;
 }
 
 //Function to increase the max domain of x-axis to include the total max value of medals.
@@ -135,7 +143,11 @@ function maxDomainModifier(max) {
     } else {
         percentToAdd = 1;
     }
-    return Number(percentToAdd) + Number(max);
+
+    let maxDomain = Number(percentToAdd) + Number(max);
+    console.log("max Domain", maxDomain);
+    console.log("\n");
+    return maxDomain;
 }
 
 function createCheckList() {
