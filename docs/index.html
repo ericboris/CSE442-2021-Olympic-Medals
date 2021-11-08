@@ -129,6 +129,12 @@
             </em>
             <div>
                 Eric:
+                We discussed various data sets.
+                Iris and titantic were initial contenders.
+                Decided on olympic and map tutorial since there was more flexibility.
+                From there we decided on vertical bar graphs of medals each country had taken.
+                Which morphed into horizontal stacked bar graph of medals.
+                Didn't use map if favor of simple checklist to leave enough time to get graph right.
             </div>
         </section>
 
@@ -141,35 +147,30 @@
                 What aspects took the most time?]
             </em>
             <div>
-                Eric: We decided to use olympic 2021 data with the expectation of showing a selectable world
-                map which when selected showed multiple bar graphs of how many medals the selected countries
-                had taken in the 2021 olympics. 
-                I began by trying to show a basic vertical bar graph of dummy data. 
-                That took some effort since this was my first time using D3. 
-                Then I connected the medals data with this graph. 
-                At that time we were showing only a subset of the olympic data on this basic graph.
+                Eric started by getting a discord group, github repo, and trello setup and shared.
+                We met to discuss data sets and graph representations.
+                Decided on olympic 2021 data shown as selectable world map and graphs of medals taken.
+                Eric used selectable dummy data in a checklist to display a vertical bar graph.
+                It took some time since it was Eric's first time with d3. 
+                Eric replaced the dummy data with olympic medals data. 
+                This was difficult because Eric couldn't get the xlsx data imported into js.
+                Eric's solution was to convert xlsx to json and copy/paste the data directly into graph js.
+                We received our assigned github repo and Eric ported the existing repo to this new repo. 
                 We decided not to use multiple graphs and instead use a stacked bar chart.
-                We engaged in group programming to implement a vertical stacked bar chart from a tutorial.
-                Shortly after we switched to using a horizontal bar chart. 
-                With that in place we had a scrolling selection bar of countries that could be selected/deselected,
-                a legend, and a stacked horiontal bar chart. 
-                I first worked to remove the embedded JSON data from the file, it took up over 800 lines and 
-                made working in the file cumbersome. 
-                This took a surprising amount of time.
-                Similarly I removed code we weren't using from Legend function.  
-                Then I worked on minor parts, variable name clean up, naming consistency, 
-                tool tip reformatting, adjusting graph positioning, margins, scale, and colors. 
-                One peculiar bug we encountered is worth noting. 
-                We were dynamically scaling the graph x axis to match the maximimum bar length. 
-                However, when USA was selected the graph was scaling to the second largest bar length.
-                I couldn't solve the bug directly and added short circuit code instead. 
-                I added select and deselect all buttons for ease of use and a few smaller margin/positioning updates. 
-                All told, my biggest contributions were getting an initial graph connected to the data and index.html,
-                get initial select/deselct working,
-                removing the JSON from the file took longer than it should have, breaking key features into functions
-                so that we could hide/show selections, connect the list selection to actually hide show, fix the max
-                bug, and add select and deselect buttons.
-                I estimate that I've spend ~20+ hours on this assignment. 
+                We engaged in group programming and implemented a vertical stacked bar chart from a tutorial.
+                Shortly after we switched again to using a horizontal bar chart. 
+                We then had olympic data shown on the horizontal bar graph, a legend, and a checklist but no interactivity.
+                Eric removed the embedded json imported the data instead. 
+                Eric broke the code into functions for dynamically updating the graph to match the selection.
+                Eric got the checklist selections to update the graph.
+                The difficulty was getting the imported data out of jquery and into js.
+                Eric did code cleanup.
+                Consistent variable names, delete unused code, tool tip reformat, graph position, margins, scale, and colors.
+                We had a bug with dyamically scaling the x axis when USA, and USA only, was selected.
+                Eric fixed it by adding a short circuit when USA was selected. Ugly but functional.
+                Eric added select and deselect all buttons.
+                Eric's biggest challenges/contributions: Initial basic graph, import json, checklist to graph interactivity, max bug, and select/deselect buttons.
+                Eric's total time estimate: 20+ hours.
             </div>
         </section>
 
