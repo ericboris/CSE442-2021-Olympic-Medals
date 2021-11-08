@@ -1,24 +1,25 @@
 // Load medals.json data from GitHub repo.
 const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
 const medalsData = (() => {
-  var medalsData = null;
-  $.ajax({
-    'async': false,
-    'url': url, 
-    'dataType': "json",
-    'success': (data) => {
-      medalsData = data;
-    }
-  });
-  return medalsData;
+    var medalsData = null;
+    $.ajax({
+        'async': false,
+        'url': url,
+        'dataType': "json",
+        'success': (data) => {
+            medalsData = data;
+        }
+    });
+    return medalsData;
 })();
 
 // Define constants
 const medals = ['gold', 'silver', 'bronze'];
 const colors = ["#fdcc0d", "#c0c0c0", "#b88608"];
 const width = 800;
-const height = 450;
-// Consider a range of heights between 50 for only one country selected 
+const height = 820;
+const percentModifier = 0.05;
+// Consider a range of heights between 50 for only one country selected
 // And 900 with all countries selected.
 
 // Render blank chart
@@ -74,23 +75,23 @@ const deselectButton = d3
 // Clears the graph
 function clear() {
     d3
-    .select("#chart")
-    .select("svg")
-    .selectAll("svg > *")
-    .remove();
+        .select("#chart")
+        .select("svg")
+        .selectAll("svg > *")
+        .remove();
 }
 
 //render the initial blank graph
 // TODO Passing empty list throws TypeError: destructured parameter
 render([])
 
-// Create an collection of objects containing countries, medal type, and number 
-// of medals of that type for each type of medal. 
+// Create an collection of objects containing countries, medal type, and number
+// of medals of that type for each type of medal.
 function render(md) {
     let countryMedals = medals.flatMap((medal) => md.map((d) => ({
-            country: d.country, medal, count: d[medal]
-        }))); 
-    
+        country: d.country, medal, count: d[medal]
+    })));
+
     let chart = StackedBarChart(countryMedals, {
         x: d => d.count,
         y: d => d.country,
@@ -99,7 +100,7 @@ function render(md) {
         xLabel: " Total Medals Earned →",
         yLabel: "Country",
         zDomain: medals,
-        xDomain: [0, findMax(md)],
+        xDomain: [0, maxDomainModifier(findMax(md))],
         colors: colors,
         width: width,
         height: height,
@@ -113,18 +114,25 @@ function findMax(md) {
     let max = 0;
     for (let i = 0; i < md.length; i++) {
         let total = md[i].total;
-        // Short circuit to avoid max bug.        
+        // Short circuit to avoid max bug.
         if (total > 100) {
             return total;
         }
         if (total > max) {
             max = total;
         }
-    } 
+    }
     return max > 0 ? max : 20;
 }
 
-function createCheckList() { 
+
+function maxDomainModifier(max) {
+    let percentToAdd = max*percentModifier;
+    percentToAdd = percentToAdd > 1? Math.round(percentToAdd) : 1;
+    return maxDomain;
+}
+
+function createCheckList() {
     // Create scroll box containing n=medalsData.length empty list tags.
     let listItems = d3
         .select('#data')
@@ -140,10 +148,10 @@ function createCheckList() {
     // and add country name to deselectedCountries.
     // If box is checked do the opposite.
     // Put this before adding a country name so checkbox is left of name.
-    listItems                                                                           
+    listItems
         .append('input')
         .attr('type', 'checkbox')
-        .on('change', (event) => {                                                         
+        .on('change', (event) => {
             let country = event.currentTarget.__data__.country;
             if (!event.currentTarget.checked) {
                 // Prevent adding duplicates.
