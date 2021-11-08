@@ -109,7 +109,7 @@ function render(md) {
     });
 }
 
-// Function to find the max total medals and resizing the graph with that.
+// Function to find the max total medals.
 function findMax(md) {
     let max = 0;
     for (let i = 0; i < md.length; i++) {
@@ -125,10 +125,11 @@ function findMax(md) {
     return max > 0 ? max : 20;
 }
 
-
+//Function to increase the max domain of x-axis to include the total max value of medals.
 function maxDomainModifier(max) {
-    let percentToAdd = max*percentModifier;
-    percentToAdd = percentToAdd > 1? Math.round(percentToAdd) : 1;
+    let percentToAdd = Number(max)*Number(percentModifier);
+    percentToAdd = percentToAdd > 3 ? 10 : percentToAdd > 1? 5 : 1;
+    let maxDomain = Number(percentToAdd) + Number(max);
     return maxDomain;
 }
 
