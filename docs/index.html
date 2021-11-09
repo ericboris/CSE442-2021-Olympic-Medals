@@ -122,37 +122,28 @@
 
         <section>
             <h2>Design Decisions</h2>
-            <em>
-                [Add: a rationale for your design decisions.
-                How did you choose your particular visual encodings and interaction techniques?
-                What alternatives did you consider and how did you arrive at your ultimate choices?]
-            </em>
             <div>
-                Eric:
-                <br>
-                We discussed various data sets.
-                Iris and titantic were initial contenders.
-                Decided on olympic and map tutorial since there was more flexibility.
-                From there we decided on vertical bar graphs of medals each country had taken.
-                Which morphed into horizontal stacked bar graph of medals.
-                Didn't use map if favor of simple checklist to leave enough time to get graph right.
-                <br>
-                <br>
-                Alyssa:
-                <br>
+
                 Because we decided to use 2021 Olympic medal data, we initially decided that we wanted a
                 world map to represent the different countries in the data set. We would then have four
                 (yes, four!) graphs to the right side of the map that would show the number of gold, silver,
-                bronze, and total medals for the countries chosen from the map. In the process of getting
-                one working graph functioning like we wanted it to, we quickly realized we needed to adjust our design.
+                bronze, and total medals for the countries chosen from the map.
+                <br>
+                <br>
+                In the process of getting one working graph functioning like we wanted it to, we quickly realized we needed to adjust our design.
                 We chose to have the countries listed in a a scroll box and they can be selected for comparison
                 by checking the box next to the country. We also decided that 4 graphs was overkill, and we could
-                properly compare the data using a horizontal stacked graph. We chose a stacked graph because
+                properly compare the data using a horizontal stacked graph.
+                <br>
+                <br>
+                We chose a stacked graph because
                 it uses size and color to properly convey to the reader how the countries shaped up against each other
                 last summer. The color scheme for us was fairly obvious. Gold had to be gold, and so on. 
                 Luckily, those colors are fairly easy to make out on their own, but we added a legend to make it
                 crystal clear. There is also a tooltip that displays how many medals were earned for whichever section
                 the mouse is hovering. Our y-axis displays our dimension, which are the countries being compared to each other.
+                <br>
+                <br>
                 This is a nominal data type. Our x-axis is the measure and it's the total number of medals earned, a 
                 quantitative ratio data type. We also have a z-axis! The stacked bars are split up by gold, silver, and bronze
                 medals, which are ordinal. We chose our interaction technique because we wanted the reader to be able to compare
@@ -163,93 +154,51 @@
 
         <section>
         <h2>Development Process</h2>
-            <em>
-                [Add: describe how the work was split among the team members.
-                Include a commentary on the development process, including answers to the following questions: 
-                Roughly how much time did you spend developing your application (in people-hours)? 
-                What aspects took the most time?]
-            </em>
+
             <div>
-                Eric started by getting a discord group, github repo, and trello setup and shared.
-                We met to discuss data sets and graph representations.
-                Decided on olympic 2021 data shown as selectable world map and graphs of medals taken.
-                Eric used selectable dummy data in a checklist to display a vertical bar graph.
-                It took some time since it was Eric's first time with d3. 
-                Eric replaced the dummy data with olympic medals data. 
-                This was difficult because Eric couldn't get the xlsx data imported into js.
-                Eric's solution was to convert xlsx to json and copy/paste the data directly into graph js.
-                We received our assigned github repo and Eric ported the existing repo to this new repo. 
-                We decided not to use multiple graphs and instead use a stacked bar chart.
-                We engaged in group programming and implemented a vertical stacked bar chart from a tutorial.
-                Shortly after we switched again to using a horizontal bar chart. 
-                We then had olympic data shown on the horizontal bar graph, a legend, and a checklist but no interactivity.
-                Eric removed the embedded json imported the data instead. 
-                Eric broke the code into functions for dynamically updating the graph to match the selection.
-                Eric got the checklist selections to update the graph.
-                The difficulty was getting the imported data out of jquery and into js.
-                Eric did code cleanup.
-                Consistent variable names, delete unused code, tool tip reformat, graph position, margins, scale, and colors.
-                We had a bug with dyamically scaling the x axis when USA, and USA only, was selected.
-                Eric fixed it by adding a short circuit when USA was selected. Ugly but functional.
-                Eric added select and deselect all buttons.
-                Eric's biggest challenges/contributions: Initial basic graph, import json, checklist to graph interactivity, max bug, and select/deselect buttons.
-                Eric's total time estimate: 20+ hours.
-                <br>
-                <br>
-                Alyssa worked on the initial graph by adding axes and adjusting them to fit the needs of the graph.
-                Alyssa wrapped the large country list into a scrollbox.
-                Alyssa began creating a second "gold" graph to be shown side by side with the first graph.
-                Alyssa tried really damn hard to implement the stacked graph and legend by herself.
-                Alyssa and team programmed together to successfully implement stacked bar graph and legend.
-                Alyssa and An found where to put the render calls, how to initialize a blank graph, and how to clear the graph.
-                Alyssa wrote a method to dynamically change the size of the x axis depending on which countries were selected.
 
-                Alyssa's biggest challenges: Scrapped gold graph, dynamic x axis bugs,
-			                                unsuccessfully implementing the stacked graph, JS in general.
-                Alyssa's total time estimate: ~14 hours
-                <br>
-                <br>
-                An suggested the olympics data set on Kaggle and the idea of an interactive world map graph.
-                An gathered members' information and submitted the topic registration form for the group.
-                An contacted course staff to confirm the project specification's changes.
-                An rotated the country names on the x-axis since they were stacking on each other.
-                An changed the the graph from vertical stacked bar graph to horizontal stacked bar graph.
-                An adjusted the legend's position and size so that it won't overlap the map's area.
-                An adjusted the size of the graph to avoid overlapping country's name.
-                An updated the findMax short-circuit function from Eric to fix the bug where the graph was sliced when deselected USA.
-                An implemented the maxDomainModifier to extend the length of the x-axis to surpass the longest bar.
-
-                An's biggest challenges: The max bug, clear the graph, D3's syntax, got sick earlier in the project.
-                An's total time estimate: ~14 hours
-                <br>
-                <br>
-                <br>
                 <br>
                 We started the development process by meeting to discuss data sets and graph representations.
                 Once we landed on using Olympics 2021 data, we began developing the first of what was supposed to be
                 many graphs. Eric was the frontrunner in that he was able to get the initial graph up and running.
-                He also was able to get a working checklist of countries that displayed the total medals earned. Getting
-                the data was a difficult task, so Eric converted the xlsx file into JSON and copy + pasted it
+                He also was able to get a working checklist of countries that displayed the total medals earned.
+                <br>
+                <br>
+                Getting the data was a difficult task, so Eric converted the xlsx file into JSON and copy + pasted it
                 into our graph file. He eventually was able to import the data rather than keep it embedded in the file.
                 Alyssa was working to add features to the graph, like axes, and adjusting the graph to make it look
                 how we wanted it to. She also wrapped the checklist into a scroll box for easier use. At this point, Alyssa
                 started making another graph to represent the gold medals that the countries won, and it was at this point
                 that the team discussed moving in another direction because we felt that we were attempting too much and
-                a more focused graphic. The team decided on a vertical stacked bar chart after An confirmed with the course staff about the change.
+                a more focused graphic.
+                <br>
+                <br>
+                The team decided on a vertical stacked bar chart after An confirmed with the course staff about the change.
                 Alyssa tried and failed at implementing it herself, so the team engaged in group programming and we got both the vertical stacked bar
                 chart and the legend implemented from tutorials. An rotated our x-axis labels and in doing so thought it
                 would be best to make it a horizontal stacked bar chart instead. We agreed and An implemented it. Eric then
-                broke up the code into functions to dynamically update the graph, including a render function. An and Alyssa
-                were able to figure out where to place the render calls, render an initialized blank graph, and clear the graph
+                broke up the code into functions to dynamically update the graph, including a render function.
+                <br>
+                <br>
+                An and Alyssa were able to figure out where to place the render calls, rendered an initialized blank graph, and cleared the graph
                 in between updates. Alyssa then made a function to dynamically change the x-axis max value depending on which 
                 countries were selected and An made it even better by adding a function that adds a certain percentage to the
-                max x-axis domain so that our bars were no longer hanging off the edge of our graph. There were some unusual
-                bugs in these functions that Eric and An were able to solve. Eric also added "Select" and "Deselect" buttons.
+                max x-axis domain so that our bars were no longer hanging off the edge of our graph.
+                <br>
+                <br>
+                There were some unusual bugs in these functions that Eric and An were able to solve. Eric also added "Select" and "Deselect" buttons.
                 Overall, we had a pretty difficult time figuring out how to split the work. With this assignment under our belts
                 and a little more confidence in our D3 and JavaScript abilities, though, we will have a much better idea for the
                 final project. Also our changes in plans halfway through definitely impacted how much time we had to put into this
                 project. Our biggest challenges were the initial graphs we ended up not using, checklist to graph interactivity,
-                select/deselect buttons, and weird JavaScript bugs. Our group spent ~50 hours on this project.
+                select/deselect buttons, and weird JavaScript bugs.
+                <br>
+                <br>
+                Our group spent ~50 hours on this project.
+
+                Copyright 2021 Observable, Inc.
+                Released under the ISC license.
+                https://observablehq.com/@d3/stacked-horizontal-bar-chart
             </div>
         </section>
 
