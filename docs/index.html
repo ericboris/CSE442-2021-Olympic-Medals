@@ -207,6 +207,37 @@
                 Alyssa's biggest challenges: Scrapped gold graph, dynamic x axis bugs,
 			                                unsuccessfully implementing the stacked graph, JS in general.
                 Alyssa's total time estimate: ~14 hours
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                We started the development process by meeting to discuss data sets and graph representations.
+                Once we landed on using Olympics 2021 data, we began developing the first of what was supposed to be
+                many graphs. Eric was the frontrunner in that he was able to get the initial graph up and running.
+                He also was able to get a working checklist of countries that displayed the total medals earned. Getting
+                the data was a difficult task, so Eric converted the xlsx file into JSON and copy + pasted it
+                into our graph file. He eventually was able to import the data rather than keep it embedded in the file.
+                Alyssa was working to add features to the graph, like axes, and adjusting the graph to make it look
+                how we wanted it to. She also wrapped the checklist into a scroll box for easier use. At this point, Alyssa
+                started making another graph to represent the gold medals that the countries won, and it was at this point
+                that the team discussed moving in another direction because we felt that we were attempting too much and
+                a more focused graphic. The team decided on a vertical stacked bar chart. Alyssa tried and failed at
+                implementing it herself, so the team engaged in group programming and we got both the vertical stacked bar
+                chart and the legend implemented from tutorials. An rotated our x-axis labels and in doing so thought it
+                would be best to make it a horizontal stacked bar chart instead. We agreed and An implemented it. Eric then
+                broke up the code into functions to dynamically update the graph, including a render function. An and Alyssa
+                were able to figure out where to place the render calls, render an initialized blank graph, and clear the graph
+                in between updates. Alyssa then made a function to dynamically change the x-axis max value depending on which 
+                countries were selected and An made it even better by adding a function that adds a certain percentage to the
+                max x-axis domain so that our bars were no longer hanging off the edge of our graph. There were some unusual
+                bugs in these functions that Eric and An were able to solve. Eric also added "Select" and "Deselect" buttons.
+                Overall, we had a pretty difficult time figuring out how to split the work. With this assignment under our belts
+                and a little more confidence in our D3 and JavaScript abilities, though, we will have a much better idea for the
+                final project. Also our changes in plans halfway through definitely impacted how much time we had to put into this
+                project. Our biggest challenges were the initial graphs we ended up not using, checklist to graph interactivity,
+                select/deselect buttons, and weird JavaScript bugs. Our group spent ~50 hours on this project.
             </div>
         </section>
 
