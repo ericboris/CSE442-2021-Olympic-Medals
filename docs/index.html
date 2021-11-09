@@ -127,28 +127,28 @@
                 Because we decided to use 2021 Olympic medal data, we initially decided that we wanted a
                 world map to represent the different countries in the data set. We would then have four
                 (yes, four!) graphs to the right side of the map that would show the number of gold, silver,
-                bronze, and total medals for the countries chosen from the map.
+                bronze, and total medals for the countries chosen from the map. In the process of getting
+                one working graph functioning like we wanted it to, we quickly realized we needed to reevaluate our design.
                 <br>
                 <br>
-                In the process of getting one working graph functioning like we wanted it to, we quickly realized we needed to adjust our design.
-                We chose to have the countries listed in a a scroll box and they can be selected for comparison
-                by checking the box next to the country. We also decided that 4 graphs was overkill, and we could
-                properly compare the data using a horizontal stacked graph.
+                We shelved the idea of displaying a selectable world map to focus on making a good simple graph rather than a mediochre
+                To replace the map we opted to list the countries in a scroll box.
+                We also decided that 4 graphs was overkill, and we could properly compare the data using a horizontal stacked graph.
+                We chose a stacked graph because it uses size and color to convey how the countries fared against each other.
                 <br>
                 <br>
-                We chose a stacked graph because
-                it uses size and color to properly convey to the reader how the countries shaped up against each other
-                last summer. The color scheme for us was fairly obvious. Gold had to be gold, and so on. 
-                Luckily, those colors are fairly easy to make out on their own, but we added a legend to make it
-                crystal clear. There is also a tooltip that displays how many medals were earned for whichever section
-                the mouse is hovering. Our y-axis displays our dimension, which are the countries being compared to each other.
+                The color scheme we chose for the bars was fairly obvious: Gold had to be gold, silver silver, and bronze bronze.
+                Although these colors are self explanatory, we nevertheless added a legend to remove any ambiguity.
+                We also have a mouse hover tooltip specifying the number of medals of a specify the type of medal earned by that country
+                On the y-axis we plotted the countries being compared to each other.
+                This is a nominal data type which we sort according to the number of medals earned.
                 <br>
                 <br>
-                This is a nominal data type. Our x-axis is the measure and it's the total number of medals earned, a 
-                quantitative ratio data type. We also have a z-axis! The stacked bars are split up by gold, silver, and bronze
-                medals, which are ordinal. We chose our interaction technique because we wanted the reader to be able to compare
-                whichever countries they want, no matter how many or how few. The bars dynamically change size to fit the new
-                data into the graph, and the countries are easy to scroll through to make comparison choices.
+                Our x-axis is the measure and it's the total number of medals earned, a quantitative ratio data type.
+                We also have a z-axis! The stacked bars which are split up by gold, silver, and bronze medals, and are ordinal.
+                We chose our interaction technique because we wanted the reader to be able to compare
+                whichever countries they want, no matter how many or how few.
+                To facilitate this, we made the axes dynamically scale to fit the data in the graph.
             </div>
         </section>
 
@@ -156,8 +156,6 @@
         <h2>Development Process</h2>
 
             <div>
-
-                <br>
                 We started the development process by meeting to discuss data sets and graph representations.
                 Once we landed on using Olympics 2021 data, we began developing the first of what was supposed to be
                 many graphs. Eric was the frontrunner in that he was able to get the initial graph up and running.
