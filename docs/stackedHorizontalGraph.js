@@ -1,5 +1,3 @@
-
-
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
 // https://observablehq.com/@d3/stacked-horizontal-bar-chart
@@ -8,9 +6,9 @@
 // Released under the ISC license.
 // https://observablehq.com/@d3/color-legend
 
-
 // Load medals.json data from GitHub repo.
-const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+//const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXQOPJ6O6W76T4YXYOLBTARYS";
 const medalsData = (() => {
     var medalsData = null;
     $.ajax({
@@ -23,6 +21,7 @@ const medalsData = (() => {
     });
     return medalsData;
 })();
+console.log('medalsData', medalsData);
 
 // Define constants
 const medals = ['gold', 'silver', 'bronze'];
