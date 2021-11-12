@@ -123,88 +123,14 @@
         <section>
             <h2>Design Decisions</h2>
             <div>
-                Because we decided to use 2021 Olympic medal data, we initially decided that we wanted a
-                world map to represent the different countries in the data set. We would then have four
-                (yes, four!) graphs to the right side of the map that would show the number of gold, silver,
-                bronze, and total medals for the countries chosen from the map. In the process of getting
-                one working graph functioning like we wanted it to, we quickly realized we needed to reevaluate our design.
-
-                We shelved the idea of displaying a selectable world map to focus on making a good simple graph rather than a mediochre map and graph. 
-                To replace the map we opted to list the countries in a scroll box.
-                We also decided that 4 graphs was overkill, and we could properly compare the data using a horizontal stacked graph.
-                We chose a stacked graph because it uses size and color to convey how the countries fared against each other. 
-                The color scheme we chose for the bars was fairly obvious: Gold had to be gold, silver silver, and bronze bronze. 
-                Although these colors are self explanatory, we nevertheless added a legend to remove any ambiguity.
-                We also have a mouse hover tooltip specifying the number of medals of a specify the type of medal earned by that country.
-                On the y-axis we plotted the countries being compared to each other.
-                This is a nominal data type which we sort according to the number of medals earned.
-                Our x-axis is the measure and it's the total number of medals earned, a quantitative ratio data type. 
-                We also have a z-axis! The stacked bars which are split up by gold, silver, and bronze medals, and are ordinal. 
-                We chose our interaction technique because we wanted the reader to be able to compare
-                whichever countries they want, no matter how many or how few. 
-                To facilitate this, we made the axes dynamically scale to fit the data in the graph.
-            </div>
+           Because we decided to use 2021 Olympic medal data, we initially decided that we wanted a world map to represent the different countries in the data set. We would then have four (yes, four!) graphs to the right side of the map that would show the number of gold, silver, bronze, and total medals for the countries chosen from the map. In the process of getting one working graph functioning like we wanted it to, we quickly realized we needed to reevaluate our design.</br></br>
+We shelved the idea of displaying a selectable world map to focus on making a good simple graph rather than a mediochre To replace the map we opted to list the countries in a scroll box. We also decided that 4 graphs was overkill, and we could properly compare the data using a horizontal stacked graph. We chose a stacked graph because it uses size and color to convey how the countries fared against each other.</br></br>
+The color scheme we chose for the bars was fairly obvious: Gold had to be gold, silver silver, and bronze bronze. Although these colors are self explanatory, we nevertheless added a legend to remove any ambiguity. We also have a mouse hover tooltip specifying the number of medals of a specify the type of medal earned by that country On the y-axis we plotted the countries being compared to each other. This is a nominal data type which we sort according to the number of medals earned.
+Our x-axis is the measure and it's the total number of medals earned, a quantitative ratio data type. We also have a z-axis! The stacked bars which are split up by gold, silver, and bronze medals, and are ordinal. We chose our interaction technique because we wanted the reader to be able to compare whichever countries they want, no matter how many or how few. To facilitate this, we made the axes dynamically scale to fit the data in the graph.</br>
+           </div>
         </section>
-
         <section>
         <h2>Development Process</h2>
-            <em>
-                [Add: describe how the work was split among the team members.
-                Include a commentary on the development process, including answers to the following questions: 
-                Roughly how much time did you spend developing your application (in people-hours)? 
-                What aspects took the most time?]
-            </em>
-            <div>
-                Eric started by getting a discord group, github repo, and trello setup and shared.
-                We met to discuss data sets and graph representations.
-                Decided on olympic 2021 data shown as selectable world map and graphs of medals taken.
-                Eric used selectable dummy data in a checklist to display a vertical bar graph.
-                It took some time since it was Eric's first time with d3. 
-                Eric replaced the dummy data with olympic medals data. 
-                This was difficult because Eric couldn't get the xlsx data imported into js.
-                Eric's solution was to convert xlsx to json and copy/paste the data directly into graph js.
-                We received our assigned github repo and Eric ported the existing repo to this new repo. 
-                We decided not to use multiple graphs and instead use a stacked bar chart.
-                We engaged in group programming and implemented a vertical stacked bar chart from a tutorial.
-                Shortly after we switched again to using a horizontal bar chart. 
-                We then had olympic data shown on the horizontal bar graph, a legend, and a checklist but no interactivity.
-                Eric removed the embedded json imported the data instead. 
-                Eric broke the code into functions for dynamically updating the graph to match the selection.
-                Eric got the checklist selections to update the graph.
-                The difficulty was getting the imported data out of jquery and into js.
-                Eric did code cleanup.
-                Consistent variable names, delete unused code, tool tip reformat, graph position, margins, scale, and colors.
-                We had a bug with dyamically scaling the x axis when USA, and USA only, was selected.
-                Eric fixed it by adding a short circuit when USA was selected. Ugly but functional.
-                Eric added select and deselect all buttons.
-                Eric's biggest challenges/contributions: Initial basic graph, import json, checklist to graph interactivity, max bug, and select/deselect buttons.
-                Eric's total time estimate: 20+ hours.
-                <br>
-                <br>
-                We shelved the idea of displaying a selectable world map to focus on making a good simple graph rather than a mediochre
-                To replace the map we opted to list the countries in a scroll box.
-                We also decided that 4 graphs was overkill, and we could properly compare the data using a horizontal stacked graph.
-                We chose a stacked graph because it uses size and color to convey how the countries fared against each other.
-                <br>
-                <br>
-                The color scheme we chose for the bars was fairly obvious: Gold had to be gold, silver silver, and bronze bronze.
-                Although these colors are self explanatory, we nevertheless added a legend to remove any ambiguity.
-                We also have a mouse hover tooltip specifying the number of medals of a specify the type of medal earned by that country
-                On the y-axis we plotted the countries being compared to each other.
-                This is a nominal data type which we sort according to the number of medals earned.
-                <br>
-                <br>
-                Our x-axis is the measure and it's the total number of medals earned, a quantitative ratio data type.
-                We also have a z-axis! The stacked bars which are split up by gold, silver, and bronze medals, and are ordinal.
-                We chose our interaction technique because we wanted the reader to be able to compare
-                whichever countries they want, no matter how many or how few.
-                To facilitate this, we made the axes dynamically scale to fit the data in the graph.
-            </div>
-        </section>
-
-        <section>
-        <h2>Development Process</h2>
-
             <div>
                 We started the development process by meeting to discuss data sets and graph representations.
                 Once we landed on using Olympics 2021 data, we began developing the first of what was supposed to be
