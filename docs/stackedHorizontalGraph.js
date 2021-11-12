@@ -1,5 +1,3 @@
-
-
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
 // https://observablehq.com/@d3/stacked-horizontal-bar-chart
@@ -8,9 +6,9 @@
 // Released under the ISC license.
 // https://observablehq.com/@d3/color-legend
 
-
 // Load medals.json data from GitHub repo.
-const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+//const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
+const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXQOPJ6O6W76T4YXYOLBTARYS";
 const medalsData = (() => {
     var medalsData = null;
     $.ajax({
@@ -122,7 +120,6 @@ function render(md) {
 function findMax(md) {
     let max = 0;
     let countryName = null;
-    console.log(md);
     for (let i = 0; i < md.length; i++) {
 
         // Short circuit to avoid max bug.
@@ -136,9 +133,6 @@ function findMax(md) {
 
     }
     let result = max > 0 ? max : 20;
-    console.log("max found: ", result);
-
-
     return result;
 }
 
@@ -155,8 +149,6 @@ function maxDomainModifier(max) {
     }
 
     let maxDomain = Number(percentToAdd) + Number(max);
-    console.log("max Domain", maxDomain);
-    console.log("\n");
     return maxDomain;
 }
 
