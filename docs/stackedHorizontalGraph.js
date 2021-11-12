@@ -1,3 +1,14 @@
+
+
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/stacked-horizontal-bar-chart
+
+// Copyright 2021, Observable Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/color-legend
+
+
 // Load medals.json data from GitHub repo.
 const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
 const medalsData = (() => {
@@ -80,8 +91,7 @@ function clear() {
         .remove();
 }
 
-//render the initial blank graph
-// TODO Passing empty list throws TypeError: destructured parameter
+
 render([])
 
 // Create an collection of objects containing countries, medal type, and number
