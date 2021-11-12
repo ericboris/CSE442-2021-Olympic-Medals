@@ -21,7 +21,6 @@ const medalsData = (() => {
     });
     return medalsData;
 })();
-console.log('medalsData', medalsData);
 
 // Define constants
 const medals = ['gold', 'silver', 'bronze'];
@@ -121,7 +120,6 @@ function render(md) {
 function findMax(md) {
     let max = 0;
     let countryName = null;
-    console.log(md);
     for (let i = 0; i < md.length; i++) {
 
         // Short circuit to avoid max bug.
@@ -135,9 +133,6 @@ function findMax(md) {
 
     }
     let result = max > 0 ? max : 20;
-    console.log("max found: ", result);
-
-
     return result;
 }
 
@@ -154,8 +149,6 @@ function maxDomainModifier(max) {
     }
 
     let maxDomain = Number(percentToAdd) + Number(max);
-    console.log("max Domain", maxDomain);
-    console.log("\n");
     return maxDomain;
 }
 
