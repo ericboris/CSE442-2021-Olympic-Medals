@@ -7,8 +7,7 @@
 // https://observablehq.com/@d3/color-legend
 
 // Load medals.json data from GitHub repo.
-//const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXVRMC5DZPQIF2HCY63BRX3B6";
-const url = "https://raw.githubusercontent.com/cse442-21f/A3-Olympics-2021/main/docs/data/olympic/Medals.json?token=ADHANXQOPJ6O6W76T4YXYOLBTARYS";
+const url = "https://cse442-21f.github.io/A3-Olympics-2021/data/olympic/Medals.json";
 const medalsData = (() => {
     var medalsData = null;
     $.ajax({
